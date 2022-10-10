@@ -19,11 +19,14 @@ class UserViewHolder (val view: View) : RecyclerView.ViewHolder(view){
     fun render(user:User){
 
         user_name.text=user.name
-        Glide.with(view.context).load(user.image.url).into(user_image)
+        if(user.image.url!=null){
+            Glide.with(view.context).load(user.image.url).into(user_image)
+        }
 
-//        if(!user.membership){
-//            user_status.visibility=View.INVISIBLE
-//        }
+
+       if(user.membership!=true){
+            user_status.visibility=View.INVISIBLE
+        }
     }
 
 }

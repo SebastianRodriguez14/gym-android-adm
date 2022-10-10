@@ -33,7 +33,7 @@
         android:hint=" "
         android:layout_width="match_parent"
         android:layout_height="42dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         app:startIconTint="#CBCBCB"
         app:hintTextColor="#CBCBCB"
         app:startIconDrawable="@drawable/ic_baseline_search_24"
@@ -42,7 +42,7 @@
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="32dp"
+            android:layout_height="38dp"
             android:layout_gravity="center_vertical"
             android:paddingVertical="1dp"
             android:fontFamily="@font/poppins"
@@ -55,7 +55,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/tatia/Documents/Idat/6_Sexto_Ciclo/TecFit/gym-android-adm/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.16" />
+        <entry key="..\:/Users/tatia/Documents/Idat/6_Sexto_Ciclo/TecFit/gym-android-adm/app/src/main/res/drawable/ic_launcher_background.xml" value="0.205" />
+        <entry key="..\:/Users/tatia/Documents/Idat/6_Sexto_Ciclo/TecFit/gym-android-adm/app/src/main/res/drawable/shape_info_page_option_selected.xml" value="0.205" />
+        <entry key="..\:/Users/tatia/Documents/Idat/6_Sexto_Ciclo/TecFit/gym-android-adm/app/src/main/res/drawable/shape_infor_page_users_background.xml" value="0.205" />
+        <entry key="..\:/Users/tatia/Documents/Idat/6_Sexto_Ciclo/TecFit/gym-android-adm/app/src/main/res/drawable/shape_user_background.xml" value="0.2155" />
+        <entry key="..\:/Users/tatia/Documents/Idat/6_Sexto_Ciclo/TecFit/gym-android-adm/app/src/main/res/layout/activity_main.xml" value="0.26766304347826086" />
+        <entry key="..\:/Users/tatia/Documents/Idat/6_Sexto_Ciclo/TecFit/gym-android-adm/app/src/main/res/layout/fragment_users.xml" value="0.18510928961748635" />
+        <entry key="..\:/Users/tatia/Documents/Idat/6_Sexto_Ciclo/TecFit/gym-android-adm/app/src/main/res/layout/fragments_users.xml" value="0.25" />
+        <entry key="..\:/Users/tatia/Documents/Idat/6_Sexto_Ciclo/TecFit/gym-android-adm/app/src/main/res/layout/item_users.xml" value="0.33" />
+        <entry key="..\:/Users/tatia/Documents/Idat/6_Sexto_Ciclo/TecFit/gym-android-adm/app/src/main/res/menu/bottom_nav_items.xml" value="0.29322916666666665" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

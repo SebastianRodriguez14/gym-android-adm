@@ -19,7 +19,7 @@ class UserViewHolder (val view: View) : RecyclerView.ViewHolder(view){
     fun render(user:User){
 
         user_name.text=user.name
-        if(user.image.url!=null){
+        if(user.image!=null){
             Glide.with(view.context).load(user.image.url).into(user_image)
         }
 

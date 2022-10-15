@@ -22,7 +22,9 @@ class MainActivity : AppCompatActivity() {
 
         btnNavigation.setOnNavigationItemSelectedListener{
             when(it.itemId){
-                R.id.item_users -> ForFragments.replaceFragment(supportFragmentManager,R.id.frame_container, listTrainersFragment)
+                R.id.item_users -> ForFragments.replaceFragment(supportFragmentManager,R.id.frame_container, listUserFragment)
+                R.id.item_trainers -> ForFragments.replaceFragment(supportFragmentManager, R.id.frame_container, listTrainersFragment)
+
             }
             true
         }

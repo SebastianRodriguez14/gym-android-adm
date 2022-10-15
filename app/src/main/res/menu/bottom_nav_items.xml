@@ -9,4 +9,8 @@
         android:title="Usuarios"
         android:id="@+id/item_users"
         android:icon="@drawable/ic_baseline_group_24"/>
+    <item
+        android:title="Trainers"
+        android:id="@+id/item_trainers"
+        android:icon="@drawable/ic_baseline_business_center_24"/>
 </menu>

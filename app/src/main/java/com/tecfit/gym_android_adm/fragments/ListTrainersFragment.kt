@@ -4,9 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.tecfit.gym_android_adm.R
 import com.tecfit.gym_android_adm.fragments.adapter.TrainerAdapter
 import com.tecfit.gym_android_adm.models.Trainer
@@ -20,6 +24,7 @@ class ListTrainersFragment: Fragment() {
 
     private lateinit var root:View
     private lateinit var trainersList:List<Trainer>
+    private lateinit var addButton: LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,8 +37,22 @@ class ListTrainersFragment: Fragment() {
     ): View? {
         root=inflater.inflate(R.layout.fragment_trainers,container,false)
         apiGetTrainers()
+        addButton = root.findViewById(R.id.btn_add_trainer)
+
+        addButton.setOnClickListener{
+            val dialog = BottomSheetDialog(root.context, R.style.BottonSheetDialog)
+            val vista = layoutInflater.inflate(R.layout.bottom_sheet_dialog, null)
+            println("asd")
+            dialog.setCancelable(true)
+            dialog.setContentView(vista)
+
+            dialog.show()
+        }
+
         return root
     }
+
+
 
 
 

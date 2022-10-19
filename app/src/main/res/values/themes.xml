@@ -28,6 +28,13 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorSecondaryVariant</item>
 
     </style>
+    
+    <style name="BottonSheetDialog" parent="Theme.Design.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottonSheetDialog</item>
+    </style>
 
+    <style name="BottonSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
 
 </resources>

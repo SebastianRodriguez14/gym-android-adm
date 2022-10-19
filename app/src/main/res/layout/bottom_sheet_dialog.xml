@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="30dp"
+    android:background="@drawable/shape_bottom_sheet"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="30dp"
+        android:paddingHorizontal="20dp"
+        android:layout_margin="2dp">
+
+        <TextView
+            android:id="@+id/title_trainers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/michroma"
+            android:text="Registrar Entrenador"
+            android:textColor="@color/black"
+            android:textSize="22dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title_trainers"
+            android:layout_marginTop="50dp"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nombres y Apellidos Completos"
+                android:textSize="15dp"
+                android:fontFamily="@font/poppins"
+                android:textColor="@color/black"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="20dp">
+
+                <EditText
+                    android:id="@+id/login_input_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/shape_input"
+                    android:fontFamily="@font/poppins_regular"
+                    android:inputType="textEmailAddress"
+                    android:lines="1"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="4dp"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="@color/humo"
+                    android:textColorHint="#747474"
+                    android:textSize="16sp"
+                    tools:ignore="TouchTargetSizeCheck" />
+                <TextView
+                    android:visibility="invisible"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Debe ingresar un nombre"
+                    android:textColor="@color/red"
+                    android:fontFamily="@font/poppins_regular"
+                    />
+
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title_trainers"
+            android:layout_marginTop="150dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:text="Descripción"
+                android:textSize="15dp"
+                android:textColor="@color/black" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="60dp"
+                android:orientation="vertical">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/shape_input"
+                    android:fontFamily="@font/poppins_regular"
+                    android:inputType="textEmailAddress"
+                    android:lines="1"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="4dp"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="@color/humo"
+                    android:textColorHint="#747474"
+                    android:textSize="16sp"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Debe ingresar una descripción"
+                    android:textColor="@color/red"
+                    android:visibility="invisible" />
+
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title_trainers"
+            android:layout_marginTop="250dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:text="Imagen"
+                    android:textSize="15dp"
+                    android:textColor="@color/black" />
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="3dp"
+                    android:layout_marginStart="2dp"
+                    android:src="@drawable/ic_baseline_info_24"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="40dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <EditText
+                        android:layout_width="250dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/shape_input"
+                        android:fontFamily="@font/poppins_regular"
+                        android:inputType=""
+                        android:lines="1"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="4dp"
+                        android:textColor="@color/black"
+                        android:textColorHighlight="@color/humo"
+                        android:textColorHint="#747474"
+                        android:textSize="16sp"
+                        tools:ignore="TouchTargetSizeCheck" />
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:layout_height="40dp"
+                        android:background="@drawable/shape_button_examinar"
+                        android:textColor="@color/black"
+                        android:textAllCaps="false"
+                        android:paddingTop="5dp"
+                        android:fontFamily="@font/poppins"
+                        android:text="Examinar"
+                        android:layout_marginStart="12dp"
+                        />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Debe subir una imagen"
+                    android:textColor="@color/red"
+                    android:visibility="invisible" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="60dp"
+                >
+
+                <TextView
+                    android:layout_width="135dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:paddingTop="3dp"
+                    android:fontFamily="@font/poppins"
+                    android:textColor="@color/black"
+                    android:background="@drawable/shape_button_cancelar"
+                    android:text="CANCELAR"/>
+
+                <TextView
+                    android:id="@+id/btn_register"
+                    android:layout_width="135dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:paddingTop="3dp"
+                    android:fontFamily="@font/poppins"
+                    android:textColor="@color/white"
+                    android:background="@drawable/shape_button_registrar"
+                    android:layout_marginStart="90dp"
+                    android:text="REGISTRAR"/>
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

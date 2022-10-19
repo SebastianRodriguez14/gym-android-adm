@@ -1,25 +1,37 @@
 package com.tecfit.gym_android_adm.fragments
 
+import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.tecfit.gym_android_adm.R
 import com.tecfit.gym_android_adm.fragments.adapter.TrainerAdapter
 import com.tecfit.gym_android_adm.models.Trainer
 import com.tecfit.gym_android_adm.retrofit.ApiService
 import com.tecfit.gym_android_adm.retrofit.RetrofitAdmin
+import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import www.sanju.motiontoast.MotionToast
+import www.sanju.motiontoast.MotionToastStyle
 
 class ListTrainersFragment: Fragment() {
 
     private lateinit var root:View
     private lateinit var trainersList:List<Trainer>
+    private lateinit var addButton: LinearLayout
+    private lateinit var btnAdd : TextView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,8 +44,41 @@ class ListTrainersFragment: Fragment() {
     ): View? {
         root=inflater.inflate(R.layout.fragment_trainers,container,false)
         apiGetTrainers()
+        addButton = root.findViewById(R.id.btn_add_trainer)
+
+        addButton.setOnClickListener{
+
+            val bottomSheetDialog = BottomSheetDialog(
+                requireActivity(), R.style.BottonSheetDialog
+            )
+
+            val bottomSheetView  = layoutInflater.inflate(R.layout.bottom_sheet_dialog, null)
+
+
+            bottomSheetView.findViewById<View>(R.id.btn_register).setOnClickListener{
+                MotionToast.createColorToast(requireActivity(), "Entrenador Registrado",
+                    "Se registró correctamente", MotionToastStyle.SUCCESS, MotionToast.GRAVITY_BOTTOM, MotionToast.SHORT_DURATION, null )
+                bottomSheetDialog.dismiss()
+                }
+
+
+            bottomSheetDialog.setContentView(bottomSheetView)
+            bottomSheetDialog.setCancelable(true)
+            bottomSheetDialog.show()
+
+            /*
+            val dialog = BottomSheetDialog(root.context, R.style.BottonSheetDialog)
+            val vista = layoutInflater.inflate(R.layout.bottom_sheet_dialog, null)
+
+             */
+        }
+
+
+
         return root
     }
+
+
 
 
 

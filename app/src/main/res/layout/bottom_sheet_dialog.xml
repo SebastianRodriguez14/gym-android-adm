@@ -28,13 +28,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/title_trainers"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             android:orientation="vertical"
             >
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nombres y Apellidos Completos"
+                android:text="Nombres"
                 android:textSize="15dp"
                 android:fontFamily="@font/poppins"
                 android:textColor="@color/black"
@@ -65,6 +65,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Debe ingresar un nombre"
+                    android:textSize="12dp"
                     android:textColor="@color/red"
                     android:fontFamily="@font/poppins_regular"
                     />
@@ -75,7 +76,54 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/title_trainers"
-            android:layout_marginTop="150dp"
+            android:layout_marginTop="115dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:text="Apellidos"
+                android:textSize="15dp"
+                android:textColor="@color/black" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="60dp"
+                android:orientation="vertical">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/shape_input"
+                    android:fontFamily="@font/poppins_regular"
+                    android:inputType="textEmailAddress"
+                    android:lines="1"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="4dp"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="@color/humo"
+                    android:textColorHint="#747474"
+                    android:textSize="16sp"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Debe ingresar un apellido"
+                    android:textColor="@color/red"
+                    android:textSize="12dp"
+                    android:visibility="invisible" />
+
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title_trainers"
+            android:layout_marginTop="205dp"
             android:orientation="vertical">
 
             <TextView
@@ -113,6 +161,7 @@
                     android:fontFamily="@font/poppins_regular"
                     android:text="Debe ingresar una descripción"
                     android:textColor="@color/red"
+                    android:textSize="12dp"
                     android:visibility="invisible" />
 
             </LinearLayout>
@@ -121,7 +170,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/title_trainers"
-            android:layout_marginTop="250dp"
+            android:layout_marginTop="305dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -138,6 +187,7 @@
                     android:textSize="15dp"
                     android:textColor="@color/black" />
                 <ImageView
+                    android:id="@+id/image_tooltip"
                     android:layout_width="20dp"
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="3dp"
@@ -149,60 +199,71 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="40dp"
+                android:layout_marginBottom="20dp"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:paddingHorizontal="10dp"
                     >
-                    <EditText
-                        android:layout_width="250dp"
-                        android:layout_height="40dp"
-                        android:background="@drawable/shape_input"
-                        android:fontFamily="@font/poppins_regular"
-                        android:inputType=""
-                        android:lines="1"
-                        android:paddingLeft="10dp"
-                        android:paddingTop="4dp"
-                        android:textColor="@color/black"
-                        android:textColorHighlight="@color/humo"
-                        android:textColorHint="#747474"
-                        android:textSize="16sp"
-                        tools:ignore="TouchTargetSizeCheck" />
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:layout_height="40dp"
-                        android:background="@drawable/shape_button_examinar"
-                        android:textColor="@color/black"
-                        android:textAllCaps="false"
-                        android:paddingTop="5dp"
-                        android:fontFamily="@font/poppins"
-                        android:text="Examinar"
-                        android:layout_marginStart="12dp"
-                        />
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="15dp"
+                        android:backgroundTint="@color/humo"
+                        android:outlineSpotShadowColor="@color/white"
+                        >
+                        <ImageView
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
+                            android:src="@drawable/ic_baseline_image_24"
+                            />
+                    </androidx.cardview.widget.CardView>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        >
+                        <TextView
+                            android:layout_width="130dp"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_height="40dp"
+                            android:background="@drawable/shape_button_examinar"
+                            android:textColor="@color/black"
+                            android:textAllCaps="false"
+                            android:paddingTop="5dp"
+                            android:fontFamily="@font/poppins"
+                            android:text="Examinar"
+                            />
+                        <TextView
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_regular"
+                            android:textSize="10dp"
+                            android:text="Debe subir una imagen"
+                            android:textColor="@color/red"
+                            android:visibility="visible" />
+                    </LinearLayout>
                 </LinearLayout>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_regular"
-                    android:text="Debe subir una imagen"
-                    android:textColor="@color/red"
-                    android:visibility="invisible" />
+
 
             </LinearLayout>
 
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
                 android:orientation="horizontal"
                 android:gravity="center"
-                android:layout_marginBottom="60dp"
+                android:layout_marginBottom="30dp"
                 >
 
                 <TextView
@@ -228,8 +289,6 @@
                     android:background="@drawable/shape_button_registrar"
                     android:layout_marginStart="90dp"
                     android:text="REGISTRAR"/>
-
-
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>

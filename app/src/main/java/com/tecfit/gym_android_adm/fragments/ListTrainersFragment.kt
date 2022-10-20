@@ -1,14 +1,12 @@
 package com.tecfit.gym_android_adm.fragments
 
-import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,12 +16,12 @@ import com.tecfit.gym_android_adm.fragments.adapter.TrainerAdapter
 import com.tecfit.gym_android_adm.models.Trainer
 import com.tecfit.gym_android_adm.retrofit.ApiService
 import com.tecfit.gym_android_adm.retrofit.RetrofitAdmin
-import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import www.sanju.motiontoast.MotionToast
 import www.sanju.motiontoast.MotionToastStyle
+
 
 class ListTrainersFragment: Fragment() {
 
@@ -54,16 +52,24 @@ class ListTrainersFragment: Fragment() {
 
             val bottomSheetView  = layoutInflater.inflate(R.layout.bottom_sheet_dialog, null)
 
-
             bottomSheetView.findViewById<View>(R.id.btn_register).setOnClickListener{
+                bottomSheetDialog.dismiss()
                 MotionToast.createColorToast(requireActivity(), "Entrenador Registrado",
                     "Se registró correctamente", MotionToastStyle.SUCCESS, MotionToast.GRAVITY_BOTTOM, MotionToast.SHORT_DURATION, null )
-                bottomSheetDialog.dismiss()
+
                 }
+
+            bottomSheetView.findViewById<View>(R.id.image_tooltip).setOnClickListener{
+                MotionToast.createColorToast(requireActivity(), "Entrenador Registrado",
+                    "El formato debe ser PNG\nImagen una tanto cuadrada", MotionToastStyle.INFO, MotionToast.GRAVITY_BOTTOM, MotionToast.SHORT_DURATION, null )
+
+            }
+
+
 
 
             bottomSheetDialog.setContentView(bottomSheetView)
-            bottomSheetDialog.setCancelable(true)
+            //bottomSheetDialog.setCancelable(true)
             bottomSheetDialog.show()
 
             /*

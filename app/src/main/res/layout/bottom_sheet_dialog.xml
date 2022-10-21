@@ -46,7 +46,7 @@
                 android:layout_marginBottom="20dp">
 
                 <EditText
-                    android:id="@+id/login_input_email"
+                    android:id="@+id/register_trainer_input_name"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:background="@drawable/shape_input"
@@ -61,6 +61,7 @@
                     android:textSize="16sp"
                     tools:ignore="TouchTargetSizeCheck" />
                 <TextView
+                    android:id="@+id/trainer_error_name"
                     android:visibility="invisible"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -94,6 +95,7 @@
                 android:orientation="vertical">
 
                 <EditText
+                    android:id="@+id/register_trainer_input_lastname"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:background="@drawable/shape_input"
@@ -109,6 +111,7 @@
                     tools:ignore="TouchTargetSizeCheck" />
 
                 <TextView
+                    android:id="@+id/trainer_error_lastname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
@@ -141,6 +144,7 @@
                 android:orientation="vertical">
 
                 <EditText
+                    android:id="@+id/register_trainer_input_description"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:background="@drawable/shape_input"
@@ -156,6 +160,7 @@
                     tools:ignore="TouchTargetSizeCheck" />
 
                 <TextView
+                    android:id="@+id/trainer_error_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
@@ -218,6 +223,7 @@
                         android:outlineSpotShadowColor="@color/white"
                         >
                         <ImageView
+                            android:id="@+id/register_trainer_img"
                             android:layout_width="150dp"
                             android:layout_height="150dp"
                             android:src="@drawable/ic_baseline_image_24"
@@ -229,6 +235,7 @@
                         android:orientation="vertical"
                         >
                         <TextView
+                            android:id="@+id/register_trainer_btn_review"
                             android:layout_width="130dp"
                             android:layout_gravity="center"
                             android:gravity="center"
@@ -241,6 +248,8 @@
                             android:text="Examinar"
                             />
                         <TextView
+                            android:id="@+id/trainer_error_img"
+                            android:visibility="invisible"
                             android:layout_gravity="center"
                             android:gravity="center"
                             android:layout_width="match_parent"
@@ -248,8 +257,7 @@
                             android:fontFamily="@font/poppins_regular"
                             android:textSize="10dp"
                             android:text="Debe subir una imagen"
-                            android:textColor="@color/red"
-                            android:visibility="visible" />
+                            android:textColor="@color/red" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -267,6 +275,7 @@
                 >
 
                 <TextView
+                    android:id="@+id/register_trainer_btn_cancel"
                     android:layout_width="135dp"
                     android:layout_height="35dp"
                     android:layout_gravity="center"
@@ -278,7 +287,7 @@
                     android:text="CANCELAR"/>
 
                 <TextView
-                    android:id="@+id/btn_register"
+                    android:id="@+id/register_trainer_btn_register"
                     android:layout_width="135dp"
                     android:layout_height="35dp"
                     android:layout_gravity="center"

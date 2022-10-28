@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">gym-android-adm</string>
+    <string-array name="item_memberships">
+        <item>1 mes</item>
+        <item>3 mes</item>
+        <item>Fecha Personalizada</item>
+    </string-array>
 </resources>

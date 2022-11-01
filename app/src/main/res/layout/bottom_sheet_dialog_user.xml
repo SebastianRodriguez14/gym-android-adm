@@ -40,6 +40,7 @@
                 android:textColor="@color/black"
                 />
             <EditText
+                android:id="@+id/txt_names"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/shape_input"
@@ -54,6 +55,7 @@
                 android:textSize="16sp"
                 tools:ignore="TouchTargetSizeCheck" />
             <TextView
+                android:id="@+id/names_error"
                 android:visibility="invisible"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -79,6 +81,7 @@
                 android:textColor="@color/black"
                 />
             <EditText
+                android:id="@+id/txt_lastname"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/shape_input"
@@ -93,6 +96,7 @@
                 android:textSize="16sp"
                 tools:ignore="TouchTargetSizeCheck" />
             <TextView
+                android:id="@+id/lastname_error"
                 android:visibility="invisible"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -118,6 +122,7 @@
                 android:textColor="@color/black"
                 />
             <EditText
+                android:id="@+id/txt_phone"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/shape_input"
@@ -132,6 +137,7 @@
                 android:textSize="16sp"
                 tools:ignore="TouchTargetSizeCheck" />
             <TextView
+                android:id="@+id/phone_error"
                 android:visibility="invisible"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -157,6 +163,7 @@
                 android:textColor="@color/black"
                 />
             <EditText
+                android:id="@+id/txt_email"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/shape_input"
@@ -171,6 +178,7 @@
                 android:textSize="16sp"
                 tools:ignore="TouchTargetSizeCheck" />
             <TextView
+                android:id="@+id/email_error"
                 android:visibility="invisible"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -196,6 +204,7 @@
                 android:textColor="@color/black"
                 />
             <EditText
+                android:id="@+id/txt_password"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/shape_input"
@@ -210,6 +219,7 @@
                 android:textSize="16sp"
                 tools:ignore="TouchTargetSizeCheck" />
             <TextView
+                android:id="@+id/password_error"
                 android:visibility="invisible"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -236,52 +246,153 @@
                     android:textColor="@color/black"/>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginBottom="10dp"
                 android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fecha de Inicio"
+                    android:fontFamily="@font/poppins"
+                    android:paddingTop="2dp"
+                    android:textSize="11dp"
+                    android:textColor="@color/black"/>
 
-                <TextView
-                    android:id="@+id/text_onemes"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"
-                    android:paddingVertical="3dp"
-                    android:layout_marginHorizontal="4dp"
-                    android:paddingHorizontal="6dp"
-                    android:gravity="center_vertical|center"
-                    android:layout_gravity="center"
+                <EditText
+                    android:id="@+id/membership_start_date"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="date"
+                    android:layout_marginStart="130dp"
+                    android:padding="5dp"
+                    android:paddingStart="5dp"
+                    android:fontFamily="@font/poppins"
+                    android:gravity="center"
+                    android:focusable="false"
+                    android:cursorVisible="false"
+                    android:focusableInTouchMode="false"
                     android:textSize="12dp"
-                    android:background="@drawable/shape_info_page_option"
-                    android:textColor="?colorOnSecondary"
-                    android:fontFamily="@font/poppins_regular"
-                    android:text="1 mes"/>
+                    android:textColor="@color/black"
+                    android:drawableEnd="@drawable/ic_baseline_calendar_month_24"
+                    android:background="@drawable/shape_input"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
                 <TextView
-                    android:id="@+id/text_twomes"
-                    android:layout_width="0dp"
-                    android:layout_weight="1.1"
-                    android:layout_height="match_parent"
-                    android:paddingVertical="3dp"
-                    android:gravity="center_vertical|center"
-                    android:textSize="12dp"
-                    android:layout_marginHorizontal="4dp"
-                    android:paddingHorizontal="6dp"
-                    android:background="@drawable/shape_info_page_option"
-                    android:textColor="?colorOnSecondary"
-                    android:fontFamily="@font/poppins_regular"
-                    android:text="3 meses"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fecha de Finalización"
+                    android:fontFamily="@font/poppins"
+                    android:paddingTop="2dp"
+                    android:layout_marginStart="2dp"
+                    android:textSize="11dp"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="@color/black"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:id="@+id/text_onemes"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:paddingVertical="3dp"
+                        android:layout_marginHorizontal="4dp"
+                        android:paddingHorizontal="6dp"
+                        android:gravity="center_vertical|center"
+                        android:layout_gravity="center"
+                        android:textSize="12dp"
+                        android:background="@drawable/shape_info_page_option"
+                        android:textColor="?colorOnSecondary"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="1 mes"/>
+                    <TextView
+                        android:id="@+id/text_twomes"
+                        android:layout_width="0dp"
+                        android:layout_weight="1.1"
+                        android:layout_height="match_parent"
+                        android:paddingVertical="3dp"
+                        android:gravity="center_vertical|center"
+                        android:textSize="12dp"
+                        android:layout_marginHorizontal="4dp"
+                        android:paddingHorizontal="6dp"
+                        android:background="@drawable/shape_info_page_option"
+                        android:textColor="?colorOnSecondary"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="3 meses"/>
+                    <TextView
+                        android:id="@+id/text_datemes"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:paddingVertical="3dp"
+                        android:textSize="10dp"
+                        android:gravity="center_vertical|center"
+                        android:layout_marginHorizontal="4dp"
+                        android:paddingHorizontal="6dp"
+                        android:background="@drawable/shape_info_page_option"
+                        android:textColor="?colorOnSecondary"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="Fecha Personalizada"/>
+
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/expiry_date_layout"
+                android:visibility="visible"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                >
                 <TextView
-                    android:id="@+id/text_datemes"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"
-                    android:paddingVertical="3dp"
-                    android:textSize="10dp"
-                    android:gravity="center_vertical|center"
-                    android:layout_marginHorizontal="4dp"
-                    android:paddingHorizontal="6dp"
-                    android:background="@drawable/shape_info_page_option"
-                    android:textColor="?colorOnSecondary"
-                    android:fontFamily="@font/poppins_regular"
-                    android:text="Fecha Personalizada"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Monto a Pagar (S/.)"
+                    android:textSize="15dp"
+                    android:fontFamily="@font/poppins"
+                    android:textColor="@color/black"/>
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="70dp"
+                    >
+                    <EditText
+                        android:enabled="false"
+                        android:id="@+id/txt_payment"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/poppins"
+                        android:inputType="numberDecimal"
+                        android:layout_width="150dp"
+                        android:textSize="14sp"
+                        android:paddingStart="5dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/shape_input"
+                        />
+                    <TextView
+                        android:id="@+id/payment_error"
+                        android:gravity="center"
+                        android:visibility="invisible"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Debe ingresar el monto"
+                        android:layout_marginTop="1dp"
+                        android:textSize="11dp"
+                        android:textColor="@color/red"
+                        android:fontFamily="@font/poppins_regular"
+                        />
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -296,6 +407,7 @@
             android:gravity="center"
             android:layout_marginBottom="30dp">
             <TextView
+                android:id="@+id/btn_register_user_cancel"
                 android:layout_width="135dp"
                 android:layout_height="35dp"
                 android:layout_gravity="center"

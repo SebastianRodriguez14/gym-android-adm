@@ -1,0 +1,85 @@
+{
+  "project_info": {
+    "project_number": "362863500522",
+    "firebase_url": "https://gym-android-8f6cb-default-rtdb.firebaseio.com",
+    "project_id": "gym-android-8f6cb",
+    "storage_bucket": "gym-android-8f6cb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:362863500522:android:a8fe377c3de869a78b8b93",
+        "android_client_info": {
+          "package_name": "com.tecfit.gym_android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "362863500522-q774o04fk81v2lcb06tfch2j86k5f82e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tecfit.gym_android",
+            "certificate_hash": "5c6f0e5590c964f692c38014ced92ccb09ecf943"
+          }
+        },
+        {
+          "client_id": "362863500522-85m8t5jgppql96rcugemo73qde8bmjj6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaL1smgfyhZd3IA6jrJpzHPxsCEBtrbc0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "362863500522-85m8t5jgppql96rcugemo73qde8bmjj6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:362863500522:android:9e66318b81f181858b8b93",
+        "android_client_info": {
+          "package_name": "com.tecfit.gym_android_adm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "362863500522-48emq5504ejsdbk825oad6ivo6b9q44v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tecfit.gym_android_adm",
+            "certificate_hash": "5c6f0e5590c964f692c38014ced92ccb09ecf943"
+          }
+        },
+        {
+          "client_id": "362863500522-85m8t5jgppql96rcugemo73qde8bmjj6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaL1smgfyhZd3IA6jrJpzHPxsCEBtrbc0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "362863500522-85m8t5jgppql96rcugemo73qde8bmjj6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

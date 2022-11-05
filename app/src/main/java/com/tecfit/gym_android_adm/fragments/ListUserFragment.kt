@@ -1,5 +1,6 @@
 package com.tecfit.gym_android_adm.fragments
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -17,6 +18,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.firebase.auth.FirebaseAuth
 import com.tecfit.gym_android_adm.R
 import com.tecfit.gym_android_adm.activities.utilities.ForValidations
 import com.tecfit.gym_android_adm.fragments.adapter.UserAdapter
@@ -39,6 +41,7 @@ import kotlin.properties.Delegates
 
 class ListUserFragment : Fragment() {
 
+    private lateinit var auth: FirebaseAuth
     private lateinit var usersList:List<User>
     private lateinit var root:View
     private lateinit var addButton:LinearLayout
@@ -63,10 +66,6 @@ class ListUserFragment : Fragment() {
     private lateinit var errorPassword: TextView
     private lateinit var errorPayment: TextView
 
-
-
-
-
     private lateinit var start_date: String
     private lateinit var expiry_date: String
     private var payment by Delegates.notNull<Double>()
@@ -84,7 +83,6 @@ class ListUserFragment : Fragment() {
     ): View? {
         root=inflater.inflate(R.layout.fragments_users,container,false)
         apiGetUsers()
-
         addButton=root.findViewById(R.id.btn_add_user)
 
         addButton.setOnClickListener{
@@ -164,7 +162,7 @@ class ListUserFragment : Fragment() {
 
         bottomSheetView.findViewById<View>(R.id.btn_register_user).setOnClickListener {
             if(validationDate() && validationRegister()){
-                registerUser()
+                registerUserFirebase(txtEmail.text.toString(), txtPassword.text.toString())
                 bottomSheetDialog.dismiss()
 
             }
@@ -176,6 +174,7 @@ class ListUserFragment : Fragment() {
         bottomSheetDialog.setContentView(bottomSheetView)
         bottomSheetDialog.show()
         }
+        auth = FirebaseAuth.getInstance()
         return root
     }
 
@@ -234,6 +233,18 @@ class ListUserFragment : Fragment() {
                 }
             }
         )
+    }
+
+    private fun registerUserFirebase(email: String, password: String){
+        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener{
+            if (it.isSuccessful) {
+                auth.currentUser?.sendEmailVerification()
+                registerUser()
+            } else {
+                println(it)
+                Toast.makeText(root.context, "Ya existe una cuenta con este correo", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun validationRegister():Boolean{

@@ -6,8 +6,8 @@
         <item name="colorPrimaryVariant">@color/red</item>
         <item name="colorOnPrimary">@color/semi_white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/semi_black</item>
-        <item name="colorSecondaryVariant">@color/semi_black</item>
+        <item name="colorSecondary">@color/black_paragraph</item>
+        <item name="colorSecondaryVariant">@color/black_paragraph</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorOnPrimary</item>
@@ -35,6 +35,15 @@
 
     <style name="BottonSheetStyle" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <!-- For startActivity, loginActivity and registerActivity -->
+    <style name="StartApplicationTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/black</item> <!-- For statusBar color -->
+
+        <item name="colorSecondary">@color/black_paragraph</item>
+
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
     </style>
 
 </resources>

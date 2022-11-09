@@ -12,4 +12,5 @@
     <color name="nero">#FF1F1F1F</color>
     <color name="humo">#FFE7E6E6</color>
     <color name="background">#FFF4F4F4</color>
+    <color name="black_paragraph">#1F1F1F</color>
 </resources>

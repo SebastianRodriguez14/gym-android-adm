@@ -5,4 +5,13 @@
         <item>3 mes</item>
         <item>Fecha Personalizada</item>
     </string-array>
+
+    <string name="login_title">Inicio de Sesión</string>
+    <string name="login_title_admin">Administrador</string>
+    <string name="login_email_hint">Ingrese su correo electrónico</string>
+    <string name="login_password_hint">Ingrese su contraseña</string>
+    <string name="login_email_error_message">El correo es incorrecto, vuelva a intentarlo.</string>
+    <string name="login_password_error_message">La contraseña es incorrecta, vuelva a intentarlo.</string>
+    <string name="login_enter">Ingresar</string>
+
 </resources>

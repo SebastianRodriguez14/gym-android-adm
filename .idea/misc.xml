@@ -3,6 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Usuario/Desktop/SCRUM - GIMNASIO TEC FIT/Proyectos/gym-android-adm/app/src/main/res/layout/bottom_sheet_dialog.xml" value="0.3704710144927536" />
+        <entry key="..\:/Users/Usuario/Desktop/SCRUM - GIMNASIO TEC FIT/Proyectos/gym-android-adm/app/src/main/res/layout/bottom_sheet_dialog_trainer_update.xml" value="0.33" />
+        <entry key="..\:/Users/Usuario/Desktop/SCRUM - GIMNASIO TEC FIT/Proyectos/gym-android-adm/app/src/main/res/layout/bottom_sheet_dialog_user.xml" value="0.3704710144927536" />
+        <entry key="..\:/Users/Usuario/Desktop/SCRUM - GIMNASIO TEC FIT/Proyectos/gym-android-adm/app/src/main/res/layout/fragment_trainers.xml" value="0.3704710144927536" />
+        <entry key="..\:/Users/Usuario/Desktop/SCRUM - GIMNASIO TEC FIT/Proyectos/gym-android-adm/app/src/main/res/layout/fragments_users.xml" value="0.3704710144927536" />
+        <entry key="..\:/Users/Usuario/Desktop/SCRUM - GIMNASIO TEC FIT/Proyectos/gym-android-adm/app/src/main/res/layout/item_trainers.xml" value="0.3704710144927536" />
         <entry key="..\:/Users/Usuario/Desktop/SCRUM - GIMNASIO TEC FIT/Proyectos/gymandroidadm/app/src/main/res/menu/bottom_nav_items.xml" value="0.240625" />
         <entry key="..\:/Users/tatia/Documents/Idat/6_Sexto_Ciclo/TecFit/gym-android-adm/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.16" />
         <entry key="..\:/Users/tatia/Documents/Idat/6_Sexto_Ciclo/TecFit/gym-android-adm/app/src/main/res/drawable/ic_launcher_background.xml" value="0.205" />
@@ -22,12 +28,5 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
-  </component>
-  <component name="VisualizationToolProject">
-    <option name="state">
-      <ProjectState>
-        <option name="scale" value="0.136" />
-      </ProjectState>
-    </option>
   </component>
 </project>

@@ -126,54 +126,55 @@ class ListUserFragment : Fragment() {
 
             textDatemes.setOnClickListener{ setBackgroundSelected(arrayOptions, textDatemes) }
 
-        bottomSheetView.findViewById<View>(R.id.membership_start_date).setOnClickListener{
-            val constraintsBuilder =
-                CalendarConstraints.Builder()
-                    .setValidator(DateValidatorPointForward.now())
+            bottomSheetView.findViewById<View>(R.id.membership_start_date).setOnClickListener{
+                val constraintsBuilder =
+                    CalendarConstraints.Builder()
+                        .setValidator(DateValidatorPointForward.now())
 
-            val dateStartPicker =
-                MaterialDatePicker.Builder.datePicker()
-                    .setTitleText("Select date")
-                    .setSelection(
-                        MaterialDatePicker.todayInUtcMilliseconds()
-                    )
-                    .setCalendarConstraints(constraintsBuilder.build())
-                    .build()
-            dateStartPicker.show(childFragmentManager,"date_picker")
+                val dateStartPicker =
+                    MaterialDatePicker.Builder.datePicker()
+                        .setTitleText("Select date")
+                        .setSelection(
+                            MaterialDatePicker.todayInUtcMilliseconds()
+                        )
+                        .setCalendarConstraints(constraintsBuilder.build())
+                        .build()
+                dateStartPicker.show(childFragmentManager,"date_picker")
 
-            dateStartPicker.addOnPositiveButtonClickListener {
+                dateStartPicker.addOnPositiveButtonClickListener {
 
-                //Date picker plus 1 day
-                val dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-                var dst = dateFormatter.format(Date(it))
-                val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-                val c = Calendar.getInstance()
-                c.time = sdf.parse(dst) as Date
-                c.add(Calendar.DATE, 1)
-                dst = sdf.format(c.time)
-                start_date = dst
-                println("start: $start_date")
-                membership_start_date.setText(dst)
+                    //Date picker plus 1 day
+                    val dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                    var dst = dateFormatter.format(Date(it))
+                    val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                    val c = Calendar.getInstance()
+                    c.time = sdf.parse(dst) as Date
+                    c.add(Calendar.DATE, 1)
+                    dst = sdf.format(c.time)
+                    start_date = dst
+                    println("start: $start_date")
+                    membership_start_date.setText(dst)
 
-                setBackgroundSelected(arrayOptions, textOnemes)
+                    setBackgroundSelected(arrayOptions, textOnemes)
+                }
+
             }
 
-        }
+            bottomSheetView.findViewById<View>(R.id.btn_register_user).setOnClickListener {
+                if(validationDate() && validationRegister()){
+                    registerUserFirebase(txtEmail.text.toString(), txtPassword.text.toString())
+                    bottomSheetDialog.dismiss()
 
-        bottomSheetView.findViewById<View>(R.id.btn_register_user).setOnClickListener {
-            if(validationDate() && validationRegister()){
-                registerUserFirebase(txtEmail.text.toString(), txtPassword.text.toString())
+                }
+            }
+
+            bottomSheetView.findViewById<View>(R.id.btn_register_user_cancel).setOnClickListener{
                 bottomSheetDialog.dismiss()
-
             }
+            bottomSheetDialog.setContentView(bottomSheetView)
+            bottomSheetDialog.show()
         }
-
-        bottomSheetView.findViewById<View>(R.id.btn_register_user_cancel).setOnClickListener{
-            bottomSheetDialog.dismiss()
-        }
-        bottomSheetDialog.setContentView(bottomSheetView)
-        bottomSheetDialog.show()
-        }
+        // Aquï acaba la llamada al modal
         auth = FirebaseAuth.getInstance()
         return root
     }
@@ -265,7 +266,7 @@ class ListUserFragment : Fragment() {
         if(membership_start_date.text.isEmpty()){
             membership_start_date.setBackgroundResource(R.drawable.shape_input_error)
             isPass = false
-        }else{
+        } else{
             membership_start_date.setBackgroundResource(R.drawable.shape_input)
             if(txtPayment.isEnabled && txtPayment.text.isEmpty()){
                 errorPayment.visibility = View.VISIBLE
@@ -288,18 +289,17 @@ class ListUserFragment : Fragment() {
 
                 when(text){
                     textOnemes->{
-
                         expiry_layout.visibility = View.INVISIBLE
                         txtPayment.isEnabled = false
                         payment = 80.0
 
                         val c = Calendar.getInstance()
                         val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+
                         c.time = sdf.parse(start_date) as Date
                         c.add(Calendar.MONTH, 1)
                         expiry_date = sdf.format(c.time)
                         println("expiry: $expiry_date")
-
                         textDatemes.text = "Fecha Personalizada"
                     }
                     textTwomes->{

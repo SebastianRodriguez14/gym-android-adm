@@ -64,17 +64,12 @@ class ListTrainersFragment: Fragment() {
 
             }
 
-
-
-
             bottomSheetDialog.setContentView(bottomSheetView)
             //bottomSheetDialog.setCancelable(true)
             bottomSheetDialog.show()
-
             /*
             val dialog = BottomSheetDialog(root.context, R.style.BottonSheetDialog)
             val vista = layoutInflater.inflate(R.layout.bottom_sheet_dialog, null)
-
              */
         }
 
@@ -90,7 +85,7 @@ class ListTrainersFragment: Fragment() {
     private fun initRecyclerView(id:Int){
         val recyclerView=root.findViewById<RecyclerView>(id)
         recyclerView.layoutManager=LinearLayoutManager(root.context)
-        recyclerView.adapter= TrainerAdapter(trainersList)
+        recyclerView.adapter= TrainerAdapter(trainersList, this)
     }
 
     private fun apiGetTrainers(){

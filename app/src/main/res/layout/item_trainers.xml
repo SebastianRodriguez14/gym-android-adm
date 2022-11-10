@@ -4,9 +4,8 @@
     android:layout_marginVertical="15dp"
     android:layout_width="match_parent"
     android:orientation="horizontal"
+    android:id="@+id/item_trainer_linear"
     android:layout_height="150dp">
-
-
     <FrameLayout
         android:layout_width="0dp"
         android:layout_weight="0.45"
@@ -50,12 +49,5 @@
                 android:fontFamily="@font/poppins_regular"
                 tools:text="Soy preparador físico personal especializado en entrenamientos con objetivos especificos de acuerdo a los objetivos personales del alumno.Tonificacion y disminucion de peso, aumento de masa muscular, rutinas post lesiones y nutrición deportiva."/>
         </ScrollView>
-
-
-
     </LinearLayout>
-
-
-
-
 </LinearLayout>

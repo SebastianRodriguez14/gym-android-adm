@@ -19,6 +19,7 @@
             android:id="@+id/item_trainer_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:scaleType="centerCrop"
             tools:src="@drawable/info_page_trainner_test"/>
     </FrameLayout>
     <LinearLayout

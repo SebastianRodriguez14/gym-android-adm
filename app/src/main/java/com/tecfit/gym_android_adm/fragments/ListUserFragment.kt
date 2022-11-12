@@ -1,6 +1,5 @@
 package com.tecfit.gym_android_adm.fragments
 
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -215,7 +214,7 @@ class ListUserFragment : Fragment() {
 
          val membership = Membership(start_date, expiry_date,payment, UserCustom(txtEmail.text.toString(),
          txtPassword.text.toString(),txtNames.text.toString(), txtLastname.text.toString(), txtPhone.text.toString(),
-         File("https://img.freepik.com/fotos-premium/hombre-musculoso-barba_144962-4695.jpg?w=360", "codigouwu")))
+         File("https://res.cloudinary.com/dfh14vom7/image/upload/v1668212939/eg1kamg0jhvvad3s0jzi.png", 5)))
 
         val apiService:ApiService= RetrofitAdmin.getRetrofit().create(ApiService::class.java)
         apiService.saveMembershipWithUser(membership).enqueue(

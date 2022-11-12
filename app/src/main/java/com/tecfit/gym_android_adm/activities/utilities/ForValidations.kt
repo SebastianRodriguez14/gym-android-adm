@@ -3,6 +3,7 @@ package com.tecfit.gym_android_adm.activities.utilities
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
+import androidx.core.view.isVisible
 
 class ForValidations {
 
@@ -67,20 +68,27 @@ class ForValidations {
         }
 
 
-        fun valInput(input: EditText, errorMessage: TextView, valFunction: (text:String) -> Boolean): Boolean {
+        fun valInput(input: EditText, errorMessage: TextView, valFunction: ((text: String) -> Boolean)?): Boolean {
             val text = removeBlanks(input.text.toString())
             var existError = true
             var finalMessage = ""
 
             if (valEmptyText(text)){
                 finalMessage = "Debes completar el campo"
-            } else if (!valFunction(text)){
-                finalMessage = customMessage
+            } else if (valFunction != null){
+                if (!valFunction(text)){
+                    finalMessage = customMessage
+
+                } else {
+                    existError = false
+                }
             } else {
                 existError = false
             }
-            println(valFunction)
-            println(existError)
+
+//            println("Para el elemento de ")
+//            println(valFunction)
+//            println(existError)
 
             errorMessage.text = finalMessage
             errorMessage.visibility = if (existError) View.VISIBLE else View.INVISIBLE

@@ -61,6 +61,7 @@
                     android:textSize="16sp"
                     tools:ignore="TouchTargetSizeCheck" />
                 <TextView
+                    android:id="@+id/update_trainer_name_error"
                     android:visibility="invisible"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -110,6 +111,7 @@
                     tools:ignore="TouchTargetSizeCheck" />
 
                 <TextView
+                    android:id="@+id/update_trainer_lastname_error"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
@@ -158,6 +160,7 @@
                     tools:ignore="TouchTargetSizeCheck" />
 
                 <TextView
+                    android:id="@+id/update_trainer_description_error"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
@@ -243,6 +246,7 @@
                             android:text="Examinar"
                             />
                         <TextView
+                            android:id="@+id/update_trainer_image_error"
                             android:layout_gravity="center"
                             android:gravity="center"
                             android:layout_width="match_parent"
@@ -251,7 +255,7 @@
                             android:textSize="10dp"
                             android:text="Debe subir una imagen"
                             android:textColor="@color/red"
-                            android:visibility="visible" />
+                            android:visibility="invisible" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>

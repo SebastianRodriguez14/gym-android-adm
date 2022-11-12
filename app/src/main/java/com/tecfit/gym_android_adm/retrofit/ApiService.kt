@@ -8,6 +8,10 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
+import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.Path
 import java.lang.reflect.Member
 
 
@@ -15,6 +19,9 @@ interface ApiService {
 
     @GET("user/all")
     fun getUsers():Call<List<User>>
+
+    @GET("user/search/{email}")
+    fun getUSer(@Path("email") email: String): Call<User>
 
     @GET("trainer/all")
     fun getTrainers(): Call<List<Trainer>>

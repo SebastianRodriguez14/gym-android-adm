@@ -56,6 +56,10 @@ class ListTrainersFragment: Fragment() {
     private lateinit var bottomSheetViewRegister:View
     private var uriImageUpdate: Uri? = null
 
+    //For delete
+    private lateinit var bottomSheetDialogDelete:BottomSheetDialog
+    private lateinit var bottomSheetViewDelete:View
+
     private lateinit var fragment: Fragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,6 +72,7 @@ class ListTrainersFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         root=inflater.inflate(R.layout.fragment_trainers,container,false)
+        createDeleteDialog()
         createUpdateDialog()
         if (ArrayForClass.arrayTrainer.isEmpty()){
             apiGetTrainers()
@@ -86,7 +91,7 @@ class ListTrainersFragment: Fragment() {
     private fun initRecyclerView(id:Int){
         val recyclerView=root.findViewById<RecyclerView>(id)
         recyclerView.layoutManager=LinearLayoutManager(root.context)
-        recyclerView.adapter= TrainerAdapter(ArrayForClass.arrayTrainer, bottomSheetDialogUpdate)
+        recyclerView.adapter= TrainerAdapter(ArrayForClass.arrayTrainer, bottomSheetDialogUpdate, bottomSheetDialogDelete)
     }
 
     private fun apiGetTrainers(){
@@ -108,6 +113,15 @@ class ListTrainersFragment: Fragment() {
             }
         })
 
+    }
+
+    private fun createDeleteDialog() {
+        bottomSheetDialogDelete = BottomSheetDialog(requireActivity(), R.style.BottonSheetDialog)
+        bottomSheetViewDelete = layoutInflater.inflate(R.layout.bottom_sheet_dialog_delete_trainer, null)
+        bottomSheetDialogDelete.setContentView(bottomSheetViewDelete)
+        bottomSheetViewDelete.findViewById<TextView>(R.id.delete_trainer_cancel).setOnClickListener {
+            bottomSheetDialogDelete.dismiss()
+        }
     }
 
     private fun createRegisterDialog(){

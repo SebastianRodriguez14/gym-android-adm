@@ -8,11 +8,11 @@ import com.tecfit.gym_android_adm.R
 import com.tecfit.gym_android_adm.fragments.ListTrainersFragment
 import com.tecfit.gym_android_adm.models.Trainer
 
-class TrainerAdapter(private val trainerList:List<Trainer>, val bottomSheetDialog: BottomSheetDialog) : RecyclerView.Adapter<TrainerViewHolder>(){
+class TrainerAdapter(private val trainerList:List<Trainer>, val bottomSheetDialoUpdate: BottomSheetDialog, val bottomSheetDialogDelete: BottomSheetDialog) : RecyclerView.Adapter<TrainerViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType:Int):TrainerViewHolder{
         val layoutInflater = LayoutInflater.from(parent.context)
-        return TrainerViewHolder(layoutInflater.inflate(R.layout.item_trainers,parent,false), bottomSheetDialog)
+        return TrainerViewHolder(layoutInflater.inflate(R.layout.item_trainers,parent,false), bottomSheetDialoUpdate, bottomSheetDialogDelete)
     }
 
     override fun onBindViewHolder(holder:TrainerViewHolder, position:Int){

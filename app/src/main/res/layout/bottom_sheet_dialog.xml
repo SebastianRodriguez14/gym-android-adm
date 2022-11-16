@@ -54,6 +54,7 @@
                     android:inputType="textEmailAddress"
                     android:lines="1"
                     android:paddingLeft="10dp"
+                    android:maxLength="50"
                     android:paddingTop="4dp"
                     android:textColor="@color/black"
                     android:textColorHighlight="@color/humo"
@@ -100,6 +101,7 @@
                     android:layout_height="40dp"
                     android:background="@drawable/shape_input"
                     android:fontFamily="@font/poppins_regular"
+                    android:maxLength="50"
                     android:inputType="textEmailAddress"
                     android:lines="1"
                     android:paddingLeft="10dp"
@@ -154,6 +156,7 @@
                     android:paddingLeft="10dp"
                     android:paddingTop="4dp"
                     android:textColor="@color/black"
+                    android:maxLength="200"
                     android:textColorHighlight="@color/humo"
                     android:textColorHint="#747474"
                     android:textSize="16sp"
@@ -226,6 +229,7 @@
                             android:id="@+id/register_trainer_image"
                             android:layout_width="150dp"
                             android:layout_height="150dp"
+                            android:scaleType="centerCrop"
                             android:src="@drawable/ic_baseline_image_24"
                             />
                     </androidx.cardview.widget.CardView>

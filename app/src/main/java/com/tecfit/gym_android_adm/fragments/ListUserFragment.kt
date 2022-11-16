@@ -194,7 +194,7 @@ class ListUserFragment : Fragment() {
             override fun onResponse(call: Call<List<User>>,response: Response<List<User>>) {
                 val listUsers=response.body()
                 if(listUsers!=null){
-                    usersList=listUsers
+                    usersList=listUsers.filter { u -> u.email != "gimnasiotecfit2022@gmail.com" }
                     initRecyclerView(R.id.recyclerview_users)
                 }
             }

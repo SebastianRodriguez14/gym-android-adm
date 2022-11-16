@@ -56,6 +56,10 @@ class ListTrainersFragment: Fragment() {
     private lateinit var bottomSheetViewRegister:View
     private var uriImageUpdate: Uri? = null
 
+    //For delete
+    private lateinit var bottomSheetDialogDelete:BottomSheetDialog
+    private lateinit var bottomSheetViewDelete:View
+
     private lateinit var fragment: Fragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,6 +72,7 @@ class ListTrainersFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         root=inflater.inflate(R.layout.fragment_trainers,container,false)
+        createDeleteDialog()
         createUpdateDialog()
         if (ArrayForClass.arrayTrainer.isEmpty()){
             apiGetTrainers()
@@ -77,16 +82,47 @@ class ListTrainersFragment: Fragment() {
         fragment = this
         addButton = root.findViewById(R.id.btn_add_trainer)
 
+        bottomSheetDialogDelete.findViewById<View>(R.id.delete_trainer_delete)
+            ?.setOnClickListener{
+                bottomSheetDialogDelete.findViewById<View>(R.id.delete_trainer_delete)!!.background.alpha = 60
+                bottomSheetDialogDelete.findViewById<View>(R.id.delete_trainer_delete)!!.isEnabled = false
+                bottomSheetDialogDelete.findViewById<View>(R.id.delete_trainer_cancel)!!.isEnabled = false
+                println(SelectedClass.trainerSelected.id_trainer)
+                deleteTrainer(SelectedClass.trainerSelected.id_trainer)
+            }
         addButton.setOnClickListener{
             createRegisterDialog()
         }
         return root
     }
 
+    fun deleteTrainer(id: Int){
+        val apiService: ApiService = RetrofitAdmin.getRetrofit().create(ApiService::class.java)
+
+        val resultTrainers: Call<Void> = apiService.deleteTrainer(id)
+
+        resultTrainers.enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                print("se pudo")
+                bottomSheetDialogDelete.findViewById<View>(R.id.delete_trainer_delete)!!.background.alpha = 255
+                bottomSheetDialogDelete.findViewById<View>(R.id.delete_trainer_delete)!!.isEnabled = true
+                bottomSheetDialogDelete.findViewById<View>(R.id.delete_trainer_cancel)!!.isEnabled = true
+                apiGetTrainers()
+                bottomSheetDialogDelete.dismiss()
+                ForMessages.showDeleteMotionToast(fragment, "Entrenador Eliminado", "Se eliminó correctamente")
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                println("no se pudo")
+            }
+
+        })
+    }
+
     private fun initRecyclerView(id:Int){
         val recyclerView=root.findViewById<RecyclerView>(id)
         recyclerView.layoutManager=LinearLayoutManager(root.context)
-        recyclerView.adapter= TrainerAdapter(ArrayForClass.arrayTrainer, bottomSheetDialogUpdate)
+        recyclerView.adapter= TrainerAdapter(ArrayForClass.arrayTrainer, bottomSheetDialogUpdate, bottomSheetDialogDelete)
     }
 
     private fun apiGetTrainers(){
@@ -108,6 +144,15 @@ class ListTrainersFragment: Fragment() {
             }
         })
 
+    }
+
+    private fun createDeleteDialog() {
+        bottomSheetDialogDelete = BottomSheetDialog(requireActivity(), R.style.BottonSheetDialog)
+        bottomSheetViewDelete = layoutInflater.inflate(R.layout.bottom_sheet_dialog_delete_trainer, null)
+        bottomSheetDialogDelete.setContentView(bottomSheetViewDelete)
+        bottomSheetViewDelete.findViewById<TextView>(R.id.delete_trainer_cancel).setOnClickListener {
+            bottomSheetDialogDelete.dismiss()
+        }
     }
 
     private fun createRegisterDialog(){

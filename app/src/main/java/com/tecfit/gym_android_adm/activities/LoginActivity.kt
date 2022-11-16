@@ -34,7 +34,7 @@ class LoginActivity : AppCompatActivity() {
                 binding.errorMessagePassword.visibility = if(password.isEmpty()) View.VISIBLE else View.INVISIBLE
             }
             else {
-                if(password.equals("ADMIN")){
+                if(email.equals("gimnasiotecfit2022@gmail.com") && password.equals("admin")){
                     binding.loginEnter.isEnabled = false
                     fetchUser(email)
                 }else{
@@ -54,6 +54,7 @@ class LoginActivity : AppCompatActivity() {
                 println("-----------------------------------------")
                 println(response.body())
                 UserInAppCustom.user = response.body()!!
+                binding.errorMessageEmail.visibility = View.INVISIBLE
                 binding.loginEnter.isEnabled = true
                 reload()
 
@@ -62,6 +63,8 @@ class LoginActivity : AppCompatActivity() {
             override fun onFailure(call: Call<User>, t: Throwable) {
                 println("-----------------------------------------")
                 println("Error: postUser() failure.")
+                binding.errorMessageEmail.text = "No existe una cuenta con ese correo"
+                binding.errorMessageEmail.visibility = View.VISIBLE
                 binding.loginEnter.isEnabled = true
             }
         })

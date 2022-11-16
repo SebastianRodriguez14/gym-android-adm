@@ -43,4 +43,7 @@ interface ApiService {
     @PUT("trainer/put/{idTrainer}")
     fun putTrainer(@Body trainer:Trainer, @Path("idTrainer") idTrainer:Int):Call<Trainer>
 
+    @DELETE("trainer/delete/{id}")
+    fun deleteTrainer(@Path("id") id: Int):Call<Void>
+
 }

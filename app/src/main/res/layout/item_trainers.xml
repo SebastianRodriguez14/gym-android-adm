@@ -40,7 +40,7 @@
             tools:text="Owen Antony Sanchez Peratta"/>
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="80dp">
             <TextView
                 android:id="@+id/text_description_trainner"
                 android:layout_width="match_parent"
@@ -50,5 +50,33 @@
                 android:fontFamily="@font/poppins_regular"
                 tools:text="Soy preparador físico personal especializado en entrenamientos con objetivos especificos de acuerdo a los objetivos personales del alumno.Tonificacion y disminucion de peso, aumento de masa muscular, rutinas post lesiones y nutrición deportiva."/>
         </ScrollView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|end">
+        <LinearLayout
+            android:id="@+id/btn_delete_trainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:orientation="vertical"
+            android:background="@drawable/shape_delete_input_trainer"
+            >
+            <TextView
+                android:id="@+id/btn_name_exercise_rep"
+                android:layout_width="65dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:text="Eliminar"
+
+                android:textColor="@color/white"
+                android:textSize="10dp"
+                android:fontFamily="@font/poppins_regular"
+                android:layout_gravity="center"
+                >
+            </TextView>
+        </LinearLayout>
+    </LinearLayout>
     </LinearLayout>
 </LinearLayout>

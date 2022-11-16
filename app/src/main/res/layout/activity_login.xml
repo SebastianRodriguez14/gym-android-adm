@@ -79,7 +79,7 @@
                     android:id="@+id/error_message_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/login_email_error_message"
+                    android:text="Debe ingresar un correo"
                     android:textColor="@color/red"
                     android:fontFamily="@font/poppins_regular"
                     />
@@ -111,7 +111,7 @@
                     android:id="@+id/error_message_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/login_password_error_message"
+                    android:text="Debe ingresar su contraseña"
                     android:textColor="@color/red"
                     android:fontFamily="@font/poppins_regular"
                     />

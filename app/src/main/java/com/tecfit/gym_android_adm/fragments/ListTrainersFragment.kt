@@ -82,10 +82,41 @@ class ListTrainersFragment: Fragment() {
         fragment = this
         addButton = root.findViewById(R.id.btn_add_trainer)
 
+        bottomSheetDialogDelete.findViewById<View>(R.id.delete_trainer_delete)
+            ?.setOnClickListener{
+                bottomSheetDialogDelete.findViewById<View>(R.id.delete_trainer_delete)!!.background.alpha = 60
+                bottomSheetDialogDelete.findViewById<View>(R.id.delete_trainer_delete)!!.isEnabled = false
+                bottomSheetDialogDelete.findViewById<View>(R.id.delete_trainer_cancel)!!.isEnabled = false
+                println(SelectedClass.trainerSelected.id_trainer)
+                deleteTrainer(SelectedClass.trainerSelected.id_trainer)
+            }
         addButton.setOnClickListener{
             createRegisterDialog()
         }
         return root
+    }
+
+    fun deleteTrainer(id: Int){
+        val apiService: ApiService = RetrofitAdmin.getRetrofit().create(ApiService::class.java)
+
+        val resultTrainers: Call<Void> = apiService.deleteTrainer(id)
+
+        resultTrainers.enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                print("se pudo")
+                bottomSheetDialogDelete.findViewById<View>(R.id.delete_trainer_delete)!!.background.alpha = 255
+                bottomSheetDialogDelete.findViewById<View>(R.id.delete_trainer_delete)!!.isEnabled = true
+                bottomSheetDialogDelete.findViewById<View>(R.id.delete_trainer_cancel)!!.isEnabled = true
+                apiGetTrainers()
+                bottomSheetDialogDelete.dismiss()
+                ForMessages.showDeleteMotionToast(fragment, "Entrenador Eliminado", "Se eliminó correctamente")
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                println("no se pudo")
+            }
+
+        })
     }
 
     private fun initRecyclerView(id:Int){

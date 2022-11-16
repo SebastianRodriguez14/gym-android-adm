@@ -41,6 +41,8 @@ class TrainerViewHolder(val view: View, val bottomSheetDialoUpdate: BottomSheetD
         tr_name.text=trainer.name + " " + trainer.lastname
         tr_description.text=trainer.description
 
+
+
         tr_delete.setOnClickListener{
             SelectedClass.trainerSelected = trainer
             bottomSheetDialogDelete.show()

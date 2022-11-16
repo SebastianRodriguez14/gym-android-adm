@@ -226,6 +226,7 @@
                             android:id="@+id/register_trainer_image"
                             android:layout_width="150dp"
                             android:layout_height="150dp"
+                            android:scaleType="centerCrop"
                             android:src="@drawable/ic_baseline_image_24"
                             />
                     </androidx.cardview.widget.CardView>

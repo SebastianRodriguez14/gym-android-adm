@@ -27,7 +27,7 @@
                 android:id="@+id/item_user_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/img_user_example"
+                android:src="@drawable/profile_user_image_default"
                 android:scaleType="centerCrop"/>
             </com.google.android.material.card.MaterialCardView>
 

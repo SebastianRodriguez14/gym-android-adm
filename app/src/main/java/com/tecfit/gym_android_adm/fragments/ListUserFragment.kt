@@ -214,13 +214,13 @@ class ListUserFragment : Fragment() {
 
          val membership = Membership(start_date, expiry_date,payment, UserCustom(txtEmail.text.toString(),
          txtPassword.text.toString(),txtNames.text.toString(), txtLastname.text.toString(), txtPhone.text.toString(),
-         File("https://res.cloudinary.com/dfh14vom7/image/upload/v1668212939/eg1kamg0jhvvad3s0jzi.png", 5)))
+         File("https://res.cloudinary.com/dfh14vom7/image/upload/v1668617884/xsdguuvlt17mzub3dzkj.png", 22)))
 
         val apiService:ApiService= RetrofitAdmin.getRetrofit().create(ApiService::class.java)
         apiService.saveMembershipWithUser(membership).enqueue(
             object : Callback<Membership>{
                 override fun onFailure(call: Call<Membership>, t: Throwable) {
-                    Toast.makeText(root.context, "No se pudo registrar al usuairo", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(root.context, "No se pudo registrar al usuario", Toast.LENGTH_SHORT).show()
 
                 }
 

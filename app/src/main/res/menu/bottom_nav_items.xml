@@ -13,4 +13,8 @@
         android:title="Trainers"
         android:id="@+id/item_trainers"
         android:icon="@drawable/ic_baseline_business_center_24"/>
+    <item
+        android:title="Products"
+        android:id="@+id/item_products"
+        android:icon="@drawable/ic_baseline_shopping_cart_24"/>
 </menu>

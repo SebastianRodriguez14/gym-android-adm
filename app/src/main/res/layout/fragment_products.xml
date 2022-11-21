@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingVertical="25dp"
+    android:paddingHorizontal="28dp"
+    android:background="@color/background"
+    >
+    <LinearLayout
+        android:id="@+id/title_products"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/ic_baseline_arrow_back_ios_24" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/michroma"
+            android:gravity="center"
+            android:paddingRight="25dp"
+            android:paddingBottom="10dp"
+            android:text="Productos"
+            android:textColor="?colorOnSecondary"
+            android:textSize="28dp" />
+    </LinearLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:hint=""
+        android:theme="@style/ProductsPageTheme"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="70dp"
+        app:startIconTint="?colorTertiary"
+        app:hintTextColor="?colorTertiary"
+        app:startIconDrawable="@drawable/ic_baseline_search_24"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        >
+
+        <EditText
+            android:id="@+id/product_input_name"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/search_bg"
+            android:fontFamily="@font/poppins"
+            android:hint="Buscar"
+            android:paddingVertical="1dp"
+            android:textSize="12dp"
+            android:theme="@style/Theme.Gymandroidadm"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                    android:id="@+id/btn_add_product"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="130dp"
+                    android:gravity="start"
+                    android:background="@drawable/shape_input_register_user">
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/icon_add"/>
+                    <TextView
+                        android:id="@+id/text_register"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="3dp"
+                        android:textAlignment="center"
+                        android:layout_marginHorizontal="4dp"
+                        android:paddingHorizontal="6dp"
+                        android:textSize="15dp"
+                        android:textColor="?colorSecondaryVariant"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="Registrar"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/products_list_linear"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="165dp"
+                android:visibility="visible"
+                android:gravity="center"
+                >
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerview_products"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    tools:listitem="@layout/item_product" />
+            </LinearLayout>
+    <LinearLayout
+        android:id="@+id/products_list_void_linear"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="invisible"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/product_list_void_message"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            />
+
+
+    </LinearLayout>
+
+</FrameLayout>

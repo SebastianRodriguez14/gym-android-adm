@@ -14,4 +14,12 @@
 
         <!-- Customize your theme here. -->
     </style>
+    <!-- Product-->
+    <style name="ProductsPageTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <item name="colorSecondary">@color/green_dark</item>
+
+        <item name="colorTertiary">@color/semi_white</item>
+
+    </style>
 </resources>

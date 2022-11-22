@@ -26,19 +26,23 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.loginEnter.setOnClickListener{
+            println("asdasd")
             val email = binding.loginInputEmail.text.toString()
             val password = binding.loginInputPassword.text.toString()
 
             if(email.isEmpty() || password.isEmpty()){
                 binding.errorMessageEmail.visibility = if(email.isEmpty()) View.VISIBLE else View.INVISIBLE
                 binding.errorMessagePassword.visibility = if(password.isEmpty()) View.VISIBLE else View.INVISIBLE
+                println("aea 1")
             }
             else {
                 if(email.equals("gimnasiotecfit2022@gmail.com") && password.equals("admin")){
                     binding.loginEnter.isEnabled = false
                     fetchUser(email)
+                    println("aea 2")
                 }else{
                     binding.errorMessagePassword.text = "Contraseña incorrecta"
+                    println("aea 3")
                 }
             }
         }

@@ -20,6 +20,7 @@ import com.tecfit.gym_android_adm.R
 import com.tecfit.gym_android_adm.activities.utilities.ForFragments
 import com.tecfit.gym_android_adm.activities.utilities.ForMessages
 import com.tecfit.gym_android_adm.activities.utilities.ForValidations
+import com.tecfit.gym_android_adm.databinding.FragmentProductsBinding
 import com.tecfit.gym_android_adm.fragments.adapter.TrainerAdapter
 import com.tecfit.gym_android_adm.models.File
 import com.tecfit.gym_android_adm.models.Trainer

@@ -1,9 +1,6 @@
 package com.tecfit.gym_android_adm.retrofit
 
-import com.tecfit.gym_android_adm.models.File
-import com.tecfit.gym_android_adm.models.Membership
-import com.tecfit.gym_android_adm.models.Trainer
-import com.tecfit.gym_android_adm.models.User
+import com.tecfit.gym_android_adm.models.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -19,6 +16,9 @@ interface ApiService {
 
     @GET("user/all")
     fun getUsers():Call<List<User>>
+
+    @GET("product/all")
+    fun getProducts(): Call<List<Product>>
 
     @GET("user/search/{email}")
     fun getUSer(@Path("email") email: String): Call<User>
@@ -45,5 +45,6 @@ interface ApiService {
 
     @DELETE("trainer/delete/{id}")
     fun deleteTrainer(@Path("id") id: Int):Call<Void>
+
 
 }

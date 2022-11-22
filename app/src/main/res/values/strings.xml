@@ -14,4 +14,6 @@
     <string name="login_password_error_message">La contraseña es incorrecta, vuelva a intentarlo.</string>
     <string name="login_enter">Ingresar</string>
 
+    <string name="product_list_void_message">Lo sentimos\nNo registro ninguno producto</string>
+
 </resources>

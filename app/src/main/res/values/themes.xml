@@ -46,4 +46,12 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
     </style>
 
+    <!-- Product-->
+    <style name="ProductsPageTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <item name="colorSecondary">@color/green</item> <!-- For color in circle of available and switch-->
+
+        <item name="colorTertiary">@color/semi_white</item> <!-- For color in search icon -->
+
+    </style>
 </resources>

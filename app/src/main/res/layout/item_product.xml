@@ -23,7 +23,7 @@
             <ImageView
                 android:id="@+id/item_product_image"
                 android:layout_width="80dp"
-                android:layout_height="100dp"
+                android:layout_height="87dp"
                 android:src="@drawable/creabolic"/>
         </LinearLayout>
         <LinearLayout

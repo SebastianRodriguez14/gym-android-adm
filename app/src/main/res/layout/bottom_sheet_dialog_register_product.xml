@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     app:cardCornerRadius="30dp"
     android:background="@drawable/shape_bottom_sheet"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,24 +17,23 @@
         android:layout_margin="2dp">
 
         <TextView
-            android:id="@+id/title_trainers"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/michroma"
-            android:text="Actualizar Entrenador"
+            android:text="Registrar Producto"
             android:textColor="@color/black"
             android:textSize="22dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
             android:orientation="vertical"
+            android:layout_marginTop="15dp"
             >
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nombres"
+                android:text="Nombre"
                 android:textSize="15dp"
                 android:fontFamily="@font/poppins"
                 android:textColor="@color/black"
@@ -46,7 +45,7 @@
                 android:layout_marginBottom="10dp">
 
                 <EditText
-                    android:id="@+id/update_trainer_name"
+                    android:id="@+id/register_product_name"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:background="@drawable/shape_input"
@@ -54,15 +53,15 @@
                     android:inputType="textEmailAddress"
                     android:lines="1"
                     android:paddingLeft="10dp"
+                    android:maxLength="50"
                     android:paddingTop="4dp"
                     android:textColor="@color/black"
-                    android:maxLength="50"
                     android:textColorHighlight="@color/humo"
                     android:textColorHint="#747474"
                     android:textSize="16sp"
                     tools:ignore="TouchTargetSizeCheck" />
                 <TextView
-                    android:id="@+id/update_trainer_name_error"
+                    android:id="@+id/register_product_name_error"
                     android:visibility="invisible"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -83,7 +82,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
-                android:text="Apellidos"
+                android:text="Precio"
                 android:textSize="15dp"
                 android:textColor="@color/black" />
 
@@ -94,16 +93,16 @@
                 android:orientation="vertical">
 
                 <EditText
-                    android:id="@+id/update_trainer_lastname"
+                    android:id="@+id/register_product_price"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:background="@drawable/shape_input"
                     android:fontFamily="@font/poppins_regular"
-                    android:inputType="textEmailAddress"
+                    android:maxLength="50"
+                    android:inputType="numberDecimal"
                     android:lines="1"
                     android:paddingLeft="10dp"
                     android:paddingTop="4dp"
-                    android:maxLength="50"
                     android:textColor="@color/black"
                     android:textColorHighlight="@color/humo"
                     android:textColorHint="#747474"
@@ -111,7 +110,7 @@
                     tools:ignore="TouchTargetSizeCheck" />
 
                 <TextView
-                    android:id="@+id/update_trainer_lastname_error"
+                    android:id="@+id/register_product_price_error"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
@@ -131,7 +130,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
-                android:text="Descripción"
+                android:text="Descuento"
                 android:textSize="15dp"
                 android:textColor="@color/black" />
 
@@ -142,7 +141,7 @@
                 android:orientation="vertical">
 
                 <EditText
-                    android:id="@+id/update_trainer_description"
+                    android:id="@+id/register_product_discount"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:background="@drawable/shape_input"
@@ -152,14 +151,14 @@
                     android:paddingLeft="10dp"
                     android:paddingTop="4dp"
                     android:textColor="@color/black"
+                    android:maxLength="200"
                     android:textColorHighlight="@color/humo"
                     android:textColorHint="#747474"
                     android:textSize="16sp"
-                    android:maxLength="200"
                     tools:ignore="TouchTargetSizeCheck" />
 
                 <TextView
-                    android:id="@+id/update_trainer_description_error"
+                    android:id="@+id/register_product_discount_error"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
@@ -172,7 +171,35 @@
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:text="Activo"
+                android:textSize="15dp"
+                android:layout_marginTop="2dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="10dp"
+                android:gravity="center"
+                android:textColor="@color/black" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/register_product_active"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:checked="false"
+                android:theme="@style/ProductsPageTheme"
+                tools:ignore="TouchTargetSizeCheck" />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -189,6 +216,7 @@
                     android:textSize="15dp"
                     android:textColor="@color/black" />
                 <ImageView
+                    android:id="@+id/image_tooltip_product"
                     android:layout_width="20dp"
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="3dp"
@@ -218,18 +246,20 @@
                         android:outlineSpotShadowColor="@color/white"
                         >
                         <ImageView
-                            android:id="@+id/update_trainer_image"
+                            android:id="@+id/register_product_image"
                             android:layout_width="150dp"
                             android:layout_height="150dp"
+                            android:scaleType="centerCrop"
                             android:src="@drawable/ic_baseline_image_24"
                             />
                     </androidx.cardview.widget.CardView>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        >
                         <TextView
-                            android:id="@+id/update_trainer_image_button"
+                            android:id="@+id/register_product_image_button"
                             android:layout_width="130dp"
                             android:layout_gravity="center"
                             android:gravity="center"
@@ -242,7 +272,7 @@
                             android:text="Examinar"
                             />
                         <TextView
-                            android:id="@+id/update_trainer_image_error"
+                            android:id="@+id/register_product_image_error"
                             android:layout_gravity="center"
                             android:gravity="center"
                             android:layout_width="match_parent"
@@ -254,7 +284,11 @@
                             android:visibility="invisible" />
                     </LinearLayout>
                 </LinearLayout>
+
+
+
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -263,8 +297,9 @@
                 android:orientation="horizontal"
                 android:gravity="center"
                 >
+
                 <TextView
-                    android:id="@+id/update_trainer_cancel"
+                    android:id="@+id/register_product_cancel"
                     android:layout_width="135dp"
                     android:layout_weight="1"
                     android:layout_height="35dp"
@@ -276,7 +311,7 @@
                     android:text="CANCELAR"/>
 
                 <TextView
-                    android:id="@+id/update_trainer_save"
+                    android:id="@+id/register_product_button"
                     android:layout_width="135dp"
                     android:layout_weight="1"
                     android:layout_marginStart="90dp"
@@ -287,8 +322,9 @@
                     android:fontFamily="@font/poppins"
                     android:textColor="@color/white"
                     android:background="@drawable/shape_button_registrar"
-                    android:text="ACTUALIZAR"/>
+                    android:text="REGISTRAR"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+
 </LinearLayout>

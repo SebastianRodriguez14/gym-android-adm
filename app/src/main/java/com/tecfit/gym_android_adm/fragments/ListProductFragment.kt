@@ -5,18 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.switchmaterial.SwitchMaterial
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.tecfit.gym_android_adm.R
+import com.tecfit.gym_android_adm.activities.utilities.ForMessages
+import com.tecfit.gym_android_adm.activities.utilities.ForValidations
 import com.tecfit.gym_android_adm.databinding.FragmentProductsBinding
 import com.tecfit.gym_android_adm.fragments.adapter.ProductAdapter
+import com.tecfit.gym_android_adm.models.File
 import com.tecfit.gym_android_adm.models.Product
-import com.tecfit.gym_android_adm.models.custom.ArrayForClass
+import com.tecfit.gym_android_adm.models.Trainer
 import com.tecfit.gym_android_adm.models.custom.ArraysForClass
 import com.tecfit.gym_android_adm.retrofit.ApiService
 import com.tecfit.gym_android_adm.retrofit.RetrofitAdmin
@@ -48,6 +49,9 @@ class ListProductFragment: Fragment() {
     private lateinit var root:View
     lateinit var binding: FragmentProductsBinding
 
+    private lateinit var bottomSheetDialogRegister:BottomSheetDialog
+    private lateinit var bottomSheetViewRegister:View
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,21 +68,36 @@ class ListProductFragment: Fragment() {
         gridLayoutManager.widthMode
         binding.recyclerviewProducts.layoutManager = gridLayoutManager
 
-        if (ArrayForClass.arrayTrainer.isEmpty()){
-            println("asd")
+        if (ArraysForClass.arrayProducts.isEmpty()){
             apiGetProducts()
         } else {
-            println("das")
             setArrayForRecycler()
         }
+
+        binding.btnAddProduct.setOnClickListener {
+            createRegisterDialog()
+        }
+
 
         return binding.root
 
     }
 
+    private fun createRegisterDialog(){
+
+        bottomSheetDialogRegister = BottomSheetDialog(
+            requireActivity(), R.style.BottonSheetDialog
+        )
+
+        bottomSheetViewRegister  = layoutInflater.inflate(R.layout.bottom_sheet_dialog_register_product, null)
+
+        bottomSheetDialogRegister.setContentView(bottomSheetViewRegister)
+        bottomSheetDialogRegister.show()
+    }
+
     private fun setArrayForRecycler(filter:Boolean = false) {
-        var products = if (!filter) ArraysForClass.arrayProducts!! else FilterProducts.applyFilters(
-            ArraysForClass.arrayProducts!!
+        var products = if (!filter) ArraysForClass.arrayProducts else FilterProducts.applyFilters(
+            ArraysForClass.arrayProducts
         )
 
         binding.recyclerviewProducts.adapter = ProductAdapter(products)
@@ -99,7 +118,7 @@ class ListProductFragment: Fragment() {
                 val listProducts = response.body()
 
                 if (listProducts != null) {
-                    ArraysForClass.arrayProducts = listProducts
+                    ArraysForClass.arrayProducts = listProducts.toMutableList()
                     setArrayForRecycler()
                 }
             }

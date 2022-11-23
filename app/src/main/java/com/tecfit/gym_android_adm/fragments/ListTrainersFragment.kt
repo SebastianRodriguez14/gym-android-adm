@@ -17,14 +17,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.tecfit.gym_android_adm.R
-import com.tecfit.gym_android_adm.activities.utilities.ForFragments
 import com.tecfit.gym_android_adm.activities.utilities.ForMessages
 import com.tecfit.gym_android_adm.activities.utilities.ForValidations
-import com.tecfit.gym_android_adm.databinding.FragmentProductsBinding
 import com.tecfit.gym_android_adm.fragments.adapter.TrainerAdapter
 import com.tecfit.gym_android_adm.models.File
 import com.tecfit.gym_android_adm.models.Trainer
-import com.tecfit.gym_android_adm.models.custom.ArrayForClass
+import com.tecfit.gym_android_adm.models.custom.ArraysForClass
 import com.tecfit.gym_android_adm.models.custom.SelectedClass
 import com.tecfit.gym_android_adm.retrofit.ApiService
 import com.tecfit.gym_android_adm.retrofit.RetrofitAdmin
@@ -35,8 +33,6 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import www.sanju.motiontoast.MotionToast
-import www.sanju.motiontoast.MotionToastStyle
 import java.io.FileOutputStream
 
 
@@ -75,7 +71,7 @@ class ListTrainersFragment: Fragment() {
         root=inflater.inflate(R.layout.fragment_trainers,container,false)
         createDeleteDialog()
         createUpdateDialog()
-        if (ArrayForClass.arrayTrainer.isEmpty()){
+        if (ArraysForClass.arrayTrainers.isEmpty()){
             apiGetTrainers()
         } else {
             initRecyclerView(R.id.recyclerview_trainers)
@@ -104,7 +100,6 @@ class ListTrainersFragment: Fragment() {
 
         resultTrainers.enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                print("se pudo")
                 bottomSheetDialogDelete.findViewById<View>(R.id.delete_trainer_delete)!!.background.alpha = 255
                 bottomSheetDialogDelete.findViewById<View>(R.id.delete_trainer_delete)!!.isEnabled = true
                 bottomSheetDialogDelete.findViewById<View>(R.id.delete_trainer_cancel)!!.isEnabled = true
@@ -114,7 +109,7 @@ class ListTrainersFragment: Fragment() {
             }
 
             override fun onFailure(call: Call<Void>, t: Throwable) {
-                println("no se pudo")
+                println("Error: deleteTrainer() failure")
             }
 
         })
@@ -123,7 +118,7 @@ class ListTrainersFragment: Fragment() {
     private fun initRecyclerView(id:Int){
         val recyclerView=root.findViewById<RecyclerView>(id)
         recyclerView.layoutManager=LinearLayoutManager(root.context)
-        recyclerView.adapter= TrainerAdapter(ArrayForClass.arrayTrainer, bottomSheetDialogUpdate, bottomSheetDialogDelete)
+        recyclerView.adapter= TrainerAdapter(ArraysForClass.arrayTrainers, bottomSheetDialogUpdate, bottomSheetDialogDelete)
     }
 
     private fun apiGetTrainers(){
@@ -135,7 +130,7 @@ class ListTrainersFragment: Fragment() {
             override fun onResponse(call: Call<List<Trainer>>, response: Response<List<Trainer>>){
                 val listTrainers = response.body()
                 if (listTrainers != null){
-                    ArrayForClass.arrayTrainer = listTrainers.toMutableList()
+                    ArraysForClass.arrayTrainers = listTrainers.toMutableList()
                     initRecyclerView(R.id.recyclerview_trainers)
                 }
             }
@@ -213,7 +208,6 @@ class ListTrainersFragment: Fragment() {
 
         bottomSheetViewUpdate.findViewById<TextView>(R.id.update_trainer_save).setOnClickListener {
             if (validateUpdate()){
-                println("Pasamos las validaciones")
                 val trainer = Trainer(
                     ForValidations.removeBlanks(bottomSheetViewUpdate.findViewById<EditText>(R.id.update_trainer_name).text.toString()),
                     ForValidations.removeBlanks(bottomSheetViewUpdate.findViewById<EditText>(R.id.update_trainer_lastname).text.toString()),
@@ -342,7 +336,6 @@ class ListTrainersFragment: Fragment() {
         resultFile.enqueue(object : Callback<File> {
             override fun onResponse(call: Call<File>, response: Response<File>){
                 if (response.isSuccessful){
-                    println("Imagen actualizada")
                     trainer.file = response.body()!!
 
                     apiPutTrainer(trainer)
@@ -366,11 +359,11 @@ class ListTrainersFragment: Fragment() {
             override fun onResponse(call: Call<Trainer>, response: Response<Trainer>){
                 if (response.isSuccessful && response.body() != null){
 
-                    val position = ArrayForClass.arrayTrainer.indexOf(
-                        ArrayForClass.arrayTrainer.find { tr -> tr.id_trainer == response.body()!!.id_trainer }
+                    val position = ArraysForClass.arrayTrainers.indexOf(
+                        ArraysForClass.arrayTrainers.find { tr -> tr.id_trainer == response.body()!!.id_trainer }
                     )
-                    ArrayForClass.arrayTrainer.removeAt(position)
-                    ArrayForClass.arrayTrainer.add(position, response.body()!!)
+                    ArraysForClass.arrayTrainers.removeAt(position)
+                    ArraysForClass.arrayTrainers.add(position, response.body()!!)
                     initRecyclerView(R.id.recyclerview_trainers)
 
                     ForMessages.showSuccessMotionToast(fragment, "Entrenador Actualizado", "Se actualizó correctamente")
@@ -394,7 +387,6 @@ class ListTrainersFragment: Fragment() {
         resultFile.enqueue(object : Callback<File> {
             override fun onResponse(call: Call<File>, response: Response<File>){
                 if (response.isSuccessful){
-                    println("Imagen registrada")
                     uriImagePost = null
                     trainer.file = response.body()!!
 
@@ -416,7 +408,7 @@ class ListTrainersFragment: Fragment() {
         resultTrainer.enqueue(object : Callback<Trainer> {
             override fun onResponse(call: Call<Trainer>, response: Response<Trainer>){
                 if (response.isSuccessful && response.body() != null){
-                    ArrayForClass.arrayTrainer.add(response.body()!!)
+                    ArraysForClass.arrayTrainers.add(response.body()!!)
                     initRecyclerView(R.id.recyclerview_trainers)
                     ForMessages.showSuccessMotionToast(fragment, "Entrenador Registrado", "Se registró correctamente")
                 } else{

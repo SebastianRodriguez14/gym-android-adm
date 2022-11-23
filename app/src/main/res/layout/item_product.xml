@@ -50,7 +50,7 @@
         android:id="@+id/item_product_discount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="95dp"
+        android:layout_marginTop="99dp"
         android:fontFamily="@font/poppins"
         android:layout_marginStart="5dp"
         android:textColor="@color/red_variant"

@@ -136,6 +136,7 @@ class ListTrainersFragment: Fragment() {
             }
             override fun onFailure(call:Call<List<Trainer>>, t:Throwable){
                 println("Error: getTrainers() failure")
+                apiGetTrainers()
                 println(t.message)
             }
         })

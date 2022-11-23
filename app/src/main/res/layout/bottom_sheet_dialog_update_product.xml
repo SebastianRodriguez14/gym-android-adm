@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     app:cardCornerRadius="30dp"
@@ -20,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/michroma"
-            android:text="Registrar Producto"
+            android:text="Actualizar Producto"
             android:textColor="@color/black"
             android:textSize="22dp" />
 
@@ -45,7 +44,7 @@
                 android:layout_marginBottom="10dp">
 
                 <EditText
-                    android:id="@+id/register_product_name"
+                    android:id="@+id/update_product_name"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:background="@drawable/shape_input"
@@ -61,7 +60,7 @@
                     android:textSize="16sp"
                     tools:ignore="TouchTargetSizeCheck" />
                 <TextView
-                    android:id="@+id/register_product_name_error"
+                    android:id="@+id/update_product_name_error"
                     android:visibility="invisible"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -93,7 +92,7 @@
                 android:orientation="vertical">
 
                 <EditText
-                    android:id="@+id/register_product_price"
+                    android:id="@+id/update_product_price"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:background="@drawable/shape_input"
@@ -110,7 +109,7 @@
                     tools:ignore="TouchTargetSizeCheck" />
 
                 <TextView
-                    android:id="@+id/register_product_price_error"
+                    android:id="@+id/update_product_price_error"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
@@ -141,7 +140,7 @@
                 android:orientation="vertical">
 
                 <EditText
-                    android:id="@+id/register_product_discount"
+                    android:id="@+id/update_product_discount"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:background="@drawable/shape_input"
@@ -158,7 +157,7 @@
                     tools:ignore="TouchTargetSizeCheck" />
 
                 <TextView
-                    android:id="@+id/register_product_discount_error"
+                    android:id="@+id/update_product_discount_error"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
@@ -187,7 +186,7 @@
                 android:textColor="@color/black" />
 
             <com.google.android.material.switchmaterial.SwitchMaterial
-                android:id="@+id/register_product_active"
+                android:id="@+id/update_product_active"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:checked="false"
@@ -246,7 +245,7 @@
                         android:outlineSpotShadowColor="@color/white"
                         >
                         <ImageView
-                            android:id="@+id/register_product_image"
+                            android:id="@+id/update_product_image"
                             android:layout_width="150dp"
                             android:layout_height="150dp"
                             android:scaleType="centerCrop"
@@ -259,7 +258,7 @@
                         android:orientation="vertical"
                         >
                         <TextView
-                            android:id="@+id/register_product_image_button"
+                            android:id="@+id/update_product_image_button"
                             android:layout_width="130dp"
                             android:layout_gravity="center"
                             android:gravity="center"
@@ -272,7 +271,7 @@
                             android:text="Examinar"
                             />
                         <TextView
-                            android:id="@+id/register_product_image_error"
+                            android:id="@+id/update_product_image_error"
                             android:layout_gravity="center"
                             android:gravity="center"
                             android:layout_width="match_parent"
@@ -299,7 +298,7 @@
                 >
 
                 <TextView
-                    android:id="@+id/register_product_cancel"
+                    android:id="@+id/update_product_cancel"
                     android:layout_width="135dp"
                     android:layout_weight="1"
                     android:layout_height="35dp"
@@ -311,7 +310,7 @@
                     android:text="CANCELAR"/>
 
                 <TextView
-                    android:id="@+id/register_product_button"
+                    android:id="@+id/update_product_button"
                     android:layout_width="135dp"
                     android:layout_weight="1"
                     android:layout_marginStart="90dp"
@@ -322,9 +321,10 @@
                     android:fontFamily="@font/poppins"
                     android:textColor="@color/white"
                     android:background="@drawable/shape_button_registrar"
-                    android:text="REGISTRAR"/>
+                    android:text="ACTUALIZAR"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+
 
 </LinearLayout>

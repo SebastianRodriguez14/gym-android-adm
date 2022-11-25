@@ -8,10 +8,11 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.tecfit.gym_android_adm.R
 import com.tecfit.gym_android_adm.models.Product
 
-class ProductViewHolder(val view:View) :RecyclerView.ViewHolder(view){
+class ProductViewHolder(val view:View, val bottomSheetDialoUpdate: BottomSheetDialog) :RecyclerView.ViewHolder(view){
 
     val pr_image = view.findViewById<ImageView>(R.id.item_product_image)
 
@@ -42,6 +43,10 @@ class ProductViewHolder(val view:View) :RecyclerView.ViewHolder(view){
             pr_status.visibility = View.INVISIBLE
             pr_image.setColorFilter(Color.parseColor("#34E10A0A"))
 
+        }
+
+        pr_image.setOnClickListener {
+            bottomSheetDialoUpdate.show()
         }
 
 

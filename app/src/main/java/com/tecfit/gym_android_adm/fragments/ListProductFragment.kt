@@ -52,6 +52,9 @@ class ListProductFragment: Fragment() {
     private lateinit var bottomSheetDialogRegister:BottomSheetDialog
     private lateinit var bottomSheetViewRegister:View
 
+    private lateinit var bottomSheetDialogUpdate:BottomSheetDialog
+    private lateinit var bottomSheetViewUpdate:View
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,6 +67,7 @@ class ListProductFragment: Fragment() {
     ): View? {
         root = inflater.inflate(R.layout.fragment_products, container, false)
         binding = FragmentProductsBinding.inflate(inflater)
+        createUpdateDialog()
         val gridLayoutManager = GridLayoutManager(root.context, 2)
         gridLayoutManager.widthMode
         binding.recyclerviewProducts.layoutManager = gridLayoutManager
@@ -95,12 +99,23 @@ class ListProductFragment: Fragment() {
         bottomSheetDialogRegister.show()
     }
 
+    private fun createUpdateDialog(){
+        bottomSheetDialogUpdate = BottomSheetDialog(
+            requireActivity(), R.style.BottonSheetDialog
+        )
+
+        bottomSheetViewUpdate  = layoutInflater.inflate(R.layout.bottom_sheet_dialog_update_product, null)
+
+        bottomSheetDialogUpdate.setContentView(bottomSheetViewUpdate)
+
+    }
+
     private fun setArrayForRecycler(filter:Boolean = false) {
         var products = if (!filter) ArraysForClass.arrayProducts else FilterProducts.applyFilters(
             ArraysForClass.arrayProducts
         )
 
-        binding.recyclerviewProducts.adapter = ProductAdapter(products)
+        binding.recyclerviewProducts.adapter = ProductAdapter(products, bottomSheetDialogUpdate)
 
         binding.productsListLinear.isVisible = products.isNotEmpty()
         binding.productsListVoidLinear.isVisible = products.isEmpty()
@@ -117,7 +132,7 @@ class ListProductFragment: Fragment() {
             override fun onResponse(call: Call<List<Product>>, response: Response<List<Product>>) {
                 val listProducts = response.body()
 
-                if (listProducts != null) {
+                if (listProducts !=  null) {
                     ArraysForClass.arrayProducts = listProducts.toMutableList()
                     setArrayForRecycler()
                 }
@@ -125,6 +140,7 @@ class ListProductFragment: Fragment() {
 
             override fun onFailure(call: Call<List<Product>>, t: Throwable) {
                 println("Error: getProducts() failure")
+                apiGetProducts()
             }
         })
 

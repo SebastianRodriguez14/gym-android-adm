@@ -46,5 +46,7 @@ interface ApiService {
     @DELETE("trainer/delete/{id}")
     fun deleteTrainer(@Path("id") id: Int):Call<Void>
 
+    @POST("product/post")
+    fun postProduct(@Body product: Product):Call<Product>
 
 }

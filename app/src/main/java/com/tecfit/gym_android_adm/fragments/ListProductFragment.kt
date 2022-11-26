@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.tecfit.gym_android_adm.R
@@ -32,11 +33,14 @@ import com.tecfit.gym_android_adm.models.File
 import com.tecfit.gym_android_adm.models.Product
 import com.tecfit.gym_android_adm.models.Trainer
 import com.tecfit.gym_android_adm.models.custom.ArraysForClass
+import com.tecfit.gym_android_adm.models.custom.SelectedClass
 import com.tecfit.gym_android_adm.retrofit.ApiService
 import com.tecfit.gym_android_adm.retrofit.RetrofitAdmin
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
+import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -49,7 +53,6 @@ class ListProductFragment: Fragment() {
     private val REQUEST_UPDATE_GALERY = 1001
     private val REQUEST_POST_GALERY = 2001
 
-    lateinit var sheetBinding: BottomSheetDialogRegisterProductBinding
 
     private lateinit var bottomSheetDialogRegister: BottomSheetDialog
     private lateinit var bottomSheetViewRegister: View
@@ -57,6 +60,7 @@ class ListProductFragment: Fragment() {
 
     private lateinit var bottomSheetDialogUpdate: BottomSheetDialog
     private lateinit var bottomSheetViewUpdate: View
+    private var uriImageUpdate: Uri? = null
 
     private lateinit var fragment: Fragment
 
@@ -71,7 +75,6 @@ class ListProductFragment: Fragment() {
     ): View? {
         root = inflater.inflate(R.layout.fragment_products, container, false)
         binding = FragmentProductsBinding.inflate(inflater)
-        sheetBinding = BottomSheetDialogRegisterProductBinding.inflate(inflater)
         createUpdateDialog()
         val gridLayoutManager = GridLayoutManager(root.context, 2)
         gridLayoutManager.widthMode
@@ -128,13 +131,12 @@ class ListProductFragment: Fragment() {
 
                 if (listProducts != null) {
                     ArraysForClass.arrayProducts = listProducts.toMutableList()
-                    initRecyclerView(R.id.recyclerview_products)
+                    setArrayForRecycler()
                 }
             }
 
             override fun onFailure(call: Call<List<Product>>, t: Throwable) {
                 println("Error: getProducts() failure")
-                apiGetProducts()
             }
         })
     }
@@ -149,7 +151,7 @@ class ListProductFragment: Fragment() {
                 println("Pasamos las validaciones")
                 val product = Product(
                     ForValidations.removeBlanks(bottomSheetViewRegister.findViewById<EditText>(R.id.register_product_name).text.toString()),
-                    bottomSheetViewRegister.findViewById<SwitchMaterial>(R.id.register_product_active).isActivated,
+                    bottomSheetViewRegister.findViewById<SwitchMaterial>(R.id.register_product_active).isChecked,
                     bottomSheetViewRegister.findViewById<EditText>(R.id.register_product_discount).text.toString().toDouble(),
                     0,
                     bottomSheetViewRegister.findViewById<EditText>(R.id.register_product_price).text.toString().toDouble(),
@@ -182,14 +184,22 @@ class ListProductFragment: Fragment() {
     private fun validateRegister(): Boolean {
         val checks = arrayOf(
             ForValidations.valInput(bottomSheetViewRegister.findViewById(R.id.register_product_name),
-                bottomSheetViewRegister.findViewById(R.id.register_product_name_error), ForValidations::valOnlyText),
-            ForValidations.valInput(bottomSheetViewRegister.findViewById(R.id.register_product_price),
-                bottomSheetViewRegister.findViewById(R.id.register_product_price_error), null),
+                bottomSheetViewRegister.findViewById(R.id.register_product_name_error), ForValidations::valAllTypeText),
             ForValidations.valInput(bottomSheetViewRegister.findViewById(R.id.register_product_discount),
-                bottomSheetViewRegister.findViewById(R.id.register_product_discount_error),null),
+                bottomSheetViewRegister.findViewById(R.id.register_product_discount_error),ForValidations::valNumber),
             validateImage(uriImagePost,bottomSheetViewRegister.findViewById(R.id.register_product_image_error))
 
             )
+        return !checks.contains(true)
+    }
+
+    private fun validateUpdate():Boolean{
+        val checks = arrayOf(
+            ForValidations.valInput(bottomSheetViewUpdate.findViewById(R.id.update_product_name),
+                bottomSheetViewUpdate.findViewById(R.id.update_product_name_error), ForValidations::valAllTypeText),
+            ForValidations.valInput(bottomSheetViewUpdate.findViewById(R.id.update_product_discount),
+                bottomSheetViewUpdate.findViewById(R.id.update_product_discount_error), ForValidations::valNumber)
+        )
         return !checks.contains(true)
     }
 
@@ -197,11 +207,51 @@ class ListProductFragment: Fragment() {
         bottomSheetDialogUpdate = BottomSheetDialog(
             requireActivity(), R.style.BottonSheetDialog
         )
-
         bottomSheetViewUpdate =
             layoutInflater.inflate(R.layout.bottom_sheet_dialog_update_product, null)
 
         bottomSheetDialogUpdate.setContentView(bottomSheetViewUpdate)
+
+        bottomSheetDialogUpdate.setOnShowListener{
+            bottomSheetViewUpdate.findViewById<TextView>(R.id.update_product_name).text = SelectedClass.productSelected.name
+            bottomSheetViewUpdate.findViewById<TextView>(R.id.update_product_price).text = SelectedClass.productSelected.price.toString()
+            bottomSheetViewUpdate.findViewById<TextView>(R.id.update_product_discount).text = SelectedClass.productSelected.discount.toInt().toString()
+            bottomSheetViewUpdate.findViewById<SwitchMaterial>(R.id.update_product_active).isChecked = SelectedClass.productSelected.status
+            Glide.with(this).load(SelectedClass.productSelected.image.url).into(bottomSheetViewUpdate.findViewById(R.id.update_product_image))
+        }
+
+        bottomSheetViewUpdate.findViewById<TextView>(R.id.update_product_cancel).setOnClickListener{
+            bottomSheetDialogUpdate.dismiss()
+        }
+
+        bottomSheetViewUpdate.findViewById<TextView>(R.id.update_product_button).setOnClickListener {
+
+            if (validateUpdate()) {
+            val product = Product(
+                ForValidations.removeBlanks(bottomSheetViewUpdate.findViewById<EditText>(R.id.update_product_name).text.toString()),
+                bottomSheetViewUpdate.findViewById<SwitchMaterial>(R.id.update_product_active).isChecked,
+                ForValidations.removeBlanks(bottomSheetViewUpdate.findViewById<EditText>(R.id.update_product_discount).text.toString())
+                    .toDouble(),
+                0,
+                bottomSheetViewUpdate.findViewById<EditText>(R.id.update_product_price).text.toString()
+                    .toDouble(),
+                File("", 0)
+            )
+            if (uriImageUpdate == null) {
+                product.image = SelectedClass.productSelected.image
+                apiPutProduct(product)
+            } else {
+                apiPutFileWithProduct(product)
+            }
+            bottomSheetDialogUpdate.dismiss()
+            apiGetProducts()
+        }
+
+        }
+
+        bottomSheetViewUpdate.findViewById<TextView>(R.id.update_product_image_button).setOnClickListener {
+            checkPermissionsForGalery(1)
+        }
     }
 
     private fun setArrayForRecycler(filter: Boolean = false) {
@@ -238,7 +288,7 @@ class ListProductFragment: Fragment() {
         val intentGalery = Intent(Intent.ACTION_PICK)
         intentGalery.type = "image/*"
         if (type == 1) {
-            //
+            startActivityForResult(intentGalery, REQUEST_UPDATE_GALERY)
         } else if (type == 2) {
             startActivityForResult(intentGalery, REQUEST_POST_GALERY)
         }
@@ -249,12 +299,12 @@ class ListProductFragment: Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_UPDATE_GALERY) {
-            //
+            uriImageUpdate = data?.data!!
+            bottomSheetViewUpdate.findViewById<ImageView>(R.id.update_product_image).setImageURI(uriImageUpdate)
         } else if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_POST_GALERY) {
 
             uriImagePost = data?.data!!
-            bottomSheetViewRegister.findViewById<ImageView>(R.id.register_product_image)
-                .setImageURI(uriImagePost)
+            bottomSheetViewRegister.findViewById<ImageView>(R.id.register_product_image).setImageURI(uriImagePost)
 
         }
     }
@@ -303,7 +353,7 @@ class ListProductFragment: Fragment() {
             override fun onResponse(call: Call<Product>, response: Response<Product>) {
                 if(response.isSuccessful && response.body() != null ){
                     ArraysForClass.arrayProducts.add(response.body()!!)
-                    initRecyclerView(R.id.recyclerview_products)
+                    apiGetProducts()
                     ForMessages.showSuccessMotionToast(fragment,"Producto Registrado","Se registró correctamente")
                 }else{
                     ForMessages.showDeleteMotionToast(fragment,"Producto No Registrado", "Hubo un error al registrar el producto")
@@ -317,6 +367,56 @@ class ListProductFragment: Fragment() {
 
     }
 
+    private fun apiPutProduct(product: Product) {
+        val apiService:ApiService = RetrofitAdmin.getRetrofit().create(ApiService::class.java)
+        val resultProduct: Call<Product> = apiService.putProduct(product, SelectedClass.productSelected.id_product)
+        resultProduct.enqueue(object : Callback<Product> {
+            override fun onResponse(call: Call<Product>, response: Response<Product>) {
+                if (response.isSuccessful && response.body() != null){
+
+                    val position = ArraysForClass.arrayProducts.indexOf(
+                        ArraysForClass.arrayProducts.find { pr -> pr.id_product == response.body()!!.id_product }
+                    )
+                    ArraysForClass.arrayProducts.removeAt(position)
+                    ArraysForClass.arrayProducts.add(position, response.body()!!)
+
+
+                    ForMessages.showSuccessMotionToast(fragment, "Producto Actualizado", "Se actualizó correctamente")
+                    apiGetProducts()
+                } else{
+                    ForMessages.showErrorMotionToast(fragment, "Producto No Actualizado", "Hubo un error al actualizar el producto")
+                }
+            }
+
+            override fun onFailure(call: Call<Product>, t: Throwable) {
+                println("Error: putTrainer() failure")
+                println(t.message)
+            }
+        })
+    }
+
+    private fun apiPutFileWithProduct(product: Product){
+        if(uriImageUpdate == null) return
+
+        val apiService:ApiService = RetrofitAdmin.getRetrofit().create(ApiService::class.java)
+
+        val requestIdFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), SelectedClass.productSelected.image.id_file.toString())
+        val resultFile: Call<File> = apiService.updateFile(processImage(uriImageUpdate), requestIdFile)
+
+        resultFile.enqueue(object : Callback<File> {
+            override fun onResponse(call: Call<File>, response: Response<File>){
+                if (response.isSuccessful){
+                    product.image = response.body()!!
+                    apiPutProduct(product)
+                    uriImageUpdate = null
+                }
+            }
+            override fun onFailure(call:Call<File>, t:Throwable){
+                println("Error: updateFile() failure")
+                println(t.message)
+            }
+        })
+    }
 
 
 }

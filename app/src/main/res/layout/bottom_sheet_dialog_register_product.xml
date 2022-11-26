@@ -58,7 +58,7 @@
                     android:paddingTop="4dp"
                     android:textColor="@color/black"
                     android:textColorHighlight="@color/humo"
-                    android:textColorHint="#747474"
+                    android:textColorHint="#cad2c5"
                     android:textSize="16sp"
                     tools:ignore="TouchTargetSizeCheck" />
                 <TextView
@@ -107,7 +107,7 @@
                     android:paddingTop="4dp"
                     android:textColor="@color/black"
                     android:textColorHighlight="@color/humo"
-                    android:textColorHint="#747474"
+                    android:textColorHint="#cad2c5"
                     android:textSize="16sp"
                     tools:ignore="TouchTargetSizeCheck" />
 
@@ -156,7 +156,7 @@
                     android:textColor="@color/black"
                     android:maxLength="200"
                     android:textColorHighlight="@color/humo"
-                    android:textColorHint="#747474"
+                    android:textColorHint="#cad2c5"
                     android:textSize="16sp"
                     tools:ignore="TouchTargetSizeCheck" />
 

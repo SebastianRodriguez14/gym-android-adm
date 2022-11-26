@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.isVisible
@@ -20,13 +21,16 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.switchmaterial.SwitchMaterial
 import com.tecfit.gym_android_adm.R
 import com.tecfit.gym_android_adm.activities.utilities.ForMessages
 import com.tecfit.gym_android_adm.activities.utilities.ForValidations
+import com.tecfit.gym_android_adm.databinding.BottomSheetDialogRegisterProductBinding
 import com.tecfit.gym_android_adm.databinding.FragmentProductsBinding
 import com.tecfit.gym_android_adm.fragments.adapter.ProductAdapter
 import com.tecfit.gym_android_adm.models.File
 import com.tecfit.gym_android_adm.models.Product
+import com.tecfit.gym_android_adm.models.Trainer
 import com.tecfit.gym_android_adm.models.custom.ArraysForClass
 import com.tecfit.gym_android_adm.retrofit.ApiService
 import com.tecfit.gym_android_adm.retrofit.RetrofitAdmin
@@ -44,6 +48,8 @@ class ListProductFragment: Fragment() {
     lateinit var binding: FragmentProductsBinding
     private val REQUEST_UPDATE_GALERY = 1001
     private val REQUEST_POST_GALERY = 2001
+
+    lateinit var sheetBinding: BottomSheetDialogRegisterProductBinding
 
     private lateinit var bottomSheetDialogRegister: BottomSheetDialog
     private lateinit var bottomSheetViewRegister: View
@@ -65,6 +71,7 @@ class ListProductFragment: Fragment() {
     ): View? {
         root = inflater.inflate(R.layout.fragment_products, container, false)
         binding = FragmentProductsBinding.inflate(inflater)
+        sheetBinding = BottomSheetDialogRegisterProductBinding.inflate(inflater)
         createUpdateDialog()
         val gridLayoutManager = GridLayoutManager(root.context, 2)
         gridLayoutManager.widthMode
@@ -138,9 +145,21 @@ class ListProductFragment: Fragment() {
         bottomSheetViewRegister = layoutInflater.inflate(R.layout.bottom_sheet_dialog_register_product, null)
 
         bottomSheetViewRegister.findViewById<TextView>(R.id.register_product_button).setOnClickListener {
-            println("adddddddddd")
-
-          }
+            if (validateRegister()) {
+                println("Pasamos las validaciones")
+                val product = Product(
+                    ForValidations.removeBlanks(bottomSheetViewRegister.findViewById<EditText>(R.id.register_product_name).text.toString()),
+                    bottomSheetViewRegister.findViewById<SwitchMaterial>(R.id.register_product_active).isActivated,
+                    bottomSheetViewRegister.findViewById<EditText>(R.id.register_product_discount).text.toString().toDouble(),
+                    0,
+                    bottomSheetViewRegister.findViewById<EditText>(R.id.register_product_price).text.toString().toDouble(),
+                    File("", 0)
+                )
+                println(product.toString())
+                apiPostProductWithFile(product)
+                bottomSheetDialogRegister.dismiss()
+            }
+        }
 
         bottomSheetViewRegister.findViewById<TextView>(R.id.register_product_image_button).setOnClickListener {
             checkPermissionsForGalery(2)

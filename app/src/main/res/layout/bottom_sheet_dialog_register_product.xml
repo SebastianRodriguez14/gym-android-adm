@@ -50,8 +50,9 @@
                     android:layout_height="40dp"
                     android:background="@drawable/shape_input"
                     android:fontFamily="@font/poppins_regular"
-                    android:inputType="textEmailAddress"
+                    android:inputType="text"
                     android:lines="1"
+                    android:hint="Mi producto"
                     android:paddingLeft="10dp"
                     android:maxLength="50"
                     android:paddingTop="4dp"
@@ -82,7 +83,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
-                android:text="Precio"
+                android:text="Precio (S/.)"
                 android:textSize="15dp"
                 android:textColor="@color/black" />
 
@@ -100,6 +101,7 @@
                     android:fontFamily="@font/poppins_regular"
                     android:maxLength="50"
                     android:inputType="numberDecimal"
+                    android:hint="10.0"
                     android:lines="1"
                     android:paddingLeft="10dp"
                     android:paddingTop="4dp"
@@ -130,7 +132,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
-                android:text="Descuento"
+                android:text="Descuento (%)"
                 android:textSize="15dp"
                 android:textColor="@color/black" />
 
@@ -144,9 +146,10 @@
                     android:id="@+id/register_product_discount"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
+                    android:hint="10"
                     android:background="@drawable/shape_input"
                     android:fontFamily="@font/poppins_regular"
-                    android:inputType="textEmailAddress"
+                    android:inputType="number"
                     android:lines="1"
                     android:paddingLeft="10dp"
                     android:paddingTop="4dp"

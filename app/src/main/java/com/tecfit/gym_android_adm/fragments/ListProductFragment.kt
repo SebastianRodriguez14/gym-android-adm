@@ -113,11 +113,7 @@ class ListProductFragment: Fragment() {
         }
     }
 
-    private fun initRecyclerView(id: Int) {
-        val recyclerView = root.findViewById<RecyclerView>(id)
-        recyclerView.layoutManager = LinearLayoutManager(root.context)
-        recyclerView.adapter = ProductAdapter(ArraysForClass.arrayProducts, bottomSheetDialogUpdate)
-    }
+
 
     private fun apiGetProducts() {
 
@@ -244,7 +240,7 @@ class ListProductFragment: Fragment() {
                 apiPutFileWithProduct(product)
             }
             bottomSheetDialogUpdate.dismiss()
-            apiGetProducts()
+            //apiGetProducts()
         }
 
         }
@@ -255,6 +251,7 @@ class ListProductFragment: Fragment() {
     }
 
     private fun setArrayForRecycler(filter: Boolean = false) {
+        println("a")
         var products = if (!filter) ArraysForClass.arrayProducts else FilterProducts.applyFilters(
             ArraysForClass.arrayProducts
         )
@@ -263,6 +260,12 @@ class ListProductFragment: Fragment() {
 
         binding.productsListLinear.isVisible = products.isNotEmpty()
         binding.productsListVoidLinear.isVisible = products.isEmpty()
+    }
+
+    private fun initRecyclerView(id: Int) {
+        val recyclerView = root.findViewById<RecyclerView>(id)
+        recyclerView.layoutManager = LinearLayoutManager(root.context)
+        recyclerView.adapter = ProductAdapter(ArraysForClass.arrayProducts, bottomSheetDialogUpdate)
     }
 
     private fun checkPermissionsForGalery(type: Int) {

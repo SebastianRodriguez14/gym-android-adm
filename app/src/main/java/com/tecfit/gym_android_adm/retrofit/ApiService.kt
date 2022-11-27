@@ -49,4 +49,8 @@ interface ApiService {
     @POST("product/post")
     fun postProduct(@Body product: Product):Call<Product>
 
+    @PUT("product/put/{idProduct}")
+    fun putProduct(@Body product: Product, @Path("idProduct") idProduct:Int):Call<Product>
+
+
 }

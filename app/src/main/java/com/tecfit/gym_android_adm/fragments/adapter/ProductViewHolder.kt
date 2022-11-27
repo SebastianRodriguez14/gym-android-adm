@@ -6,25 +6,22 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.tecfit.gym_android_adm.R
 import com.tecfit.gym_android_adm.models.Product
+import com.tecfit.gym_android_adm.models.custom.SelectedClass
 
 class ProductViewHolder(val view:View, val bottomSheetDialoUpdate: BottomSheetDialog) :RecyclerView.ViewHolder(view){
-
     val pr_image = view.findViewById<ImageView>(R.id.item_product_image)
-
     val pr_description = view.findViewById<TextView>(R.id.item_product_description)
-
     val pr_price = view.findViewById<TextView>(R.id.item_product_price)
-
     val pr_status_background = view.findViewById<FrameLayout>(R.id.item_product_status_background)
-
     val pr_status = view.findViewById<LinearLayout>(R.id.item_product_status)
-
     val pr_discount = view.findViewById<TextView>(R.id.item_product_discount)
+
 
     fun render(product: Product) {
 
@@ -36,6 +33,8 @@ class ProductViewHolder(val view:View, val bottomSheetDialoUpdate: BottomSheetDi
             pr_discount.visibility = View.VISIBLE
             pr_discount.text = "Sale " + Math.round(product.discount) + "%"
 
+        }else{
+            pr_discount.visibility = View.INVISIBLE
         }
 
         if (!product.status){
@@ -43,11 +42,17 @@ class ProductViewHolder(val view:View, val bottomSheetDialoUpdate: BottomSheetDi
             pr_status.visibility = View.INVISIBLE
             pr_image.setColorFilter(Color.parseColor("#34E10A0A"))
 
+        }else{
+            pr_status_background.setBackgroundColor(Color.TRANSPARENT)
+            pr_status.visibility = View.VISIBLE
+            pr_image.setColorFilter(Color.TRANSPARENT)
         }
 
         pr_image.setOnClickListener {
+            SelectedClass.productSelected = product
             bottomSheetDialoUpdate.show()
         }
+
 
 
 

@@ -1,7 +1,9 @@
 package com.tecfit.gym_android_adm.fragments
 
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.telecom.Call.Details
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,6 +41,9 @@ import kotlin.properties.Delegates
 
 
 class ListUserFragment : Fragment() {
+
+    private lateinit var bottomSheetDialogDetails:BottomSheetDialog
+    private lateinit var bottomSheetViewDetails:View
 
     private lateinit var auth: FirebaseAuth
     private lateinit var usersList:List<User>
@@ -82,6 +87,7 @@ class ListUserFragment : Fragment() {
     ): View? {
         root=inflater.inflate(R.layout.fragments_users,container,false)
         apiGetUsers()
+        createDetailsDialog()
         addButton=root.findViewById(R.id.btn_add_user)
 
         addButton.setOnClickListener{
@@ -179,11 +185,20 @@ class ListUserFragment : Fragment() {
     }
 
 
+    private fun createDetailsDialog() {
+        bottomSheetDialogDetails = BottomSheetDialog(requireActivity(), R.style.BottonSheetDialog)
+
+        bottomSheetViewDetails =
+            layoutInflater.inflate(R.layout.bottom_sheet_dialog_user_details, null)
+
+        bottomSheetDialogDetails.setContentView(bottomSheetViewDetails)
+    }
+
     private fun initRecyclerView(id:Int){
         val recyclerView = root.findViewById<RecyclerView>(id)
 
         recyclerView.layoutManager = LinearLayoutManager(root.context)
-        recyclerView.adapter=UserAdapter(usersList)
+        recyclerView.adapter=UserAdapter(usersList, bottomSheetDialogDetails)
     }
 
     private fun apiGetUsers(){

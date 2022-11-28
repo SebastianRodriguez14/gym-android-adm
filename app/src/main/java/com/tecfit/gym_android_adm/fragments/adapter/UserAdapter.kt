@@ -3,14 +3,15 @@ package com.tecfit.gym_android_adm.fragments.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.tecfit.gym_android_adm.R
 import com.tecfit.gym_android_adm.models.User
 
-class UserAdapter(private val userList:List<User>) : RecyclerView.Adapter<UserViewHolder>() {
+class UserAdapter(private val userList:List<User>, val bottomSheetDialogDetails: BottomSheetDialog) : RecyclerView.Adapter<UserViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType:Int):UserViewHolder{
         val layoutInflater = LayoutInflater.from(parent.context)
-        return UserViewHolder(layoutInflater.inflate(R.layout.item_users,parent,false))
+        return UserViewHolder(layoutInflater.inflate(R.layout.item_users,parent,false), bottomSheetDialogDetails)
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position:Int) {

@@ -14,6 +14,12 @@
 
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="ProfileUserPage" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <item name="colorSecondary">@color/green</item> <!-- For switch -->
+
+    </style>
     <!-- Product-->
     <style name="ProductsPageTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 

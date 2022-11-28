@@ -10,6 +10,7 @@
     android:background="@drawable/shape_user_background">
 
     <LinearLayout
+        android:id="@+id/item_user"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="5dp"

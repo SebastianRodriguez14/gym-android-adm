@@ -143,6 +143,9 @@ class ListProductFragment: Fragment() {
         bottomSheetViewRegister = layoutInflater.inflate(R.layout.bottom_sheet_dialog_register_product, null)
 
         bottomSheetViewRegister.findViewById<TextView>(R.id.register_product_button).setOnClickListener {
+            bottomSheetDialogRegister.findViewById<View>(R.id.register_product_button)!!.background.alpha = 60
+            bottomSheetDialogRegister.findViewById<View>(R.id.register_product_button)!!.isEnabled = false
+            bottomSheetDialogRegister.findViewById<View>(R.id.register_product_cancel)!!.isEnabled = false
             if (validateRegister()) {
                 println("Pasamos las validaciones")
                 val product = Product(
@@ -155,7 +158,6 @@ class ListProductFragment: Fragment() {
                 )
                 println(product.toString())
                 apiPostProductWithFile(product)
-                bottomSheetDialogRegister.dismiss()
             }
         }
 
@@ -221,7 +223,9 @@ class ListProductFragment: Fragment() {
         }
 
         bottomSheetViewUpdate.findViewById<TextView>(R.id.update_product_button).setOnClickListener {
-
+            bottomSheetDialogUpdate.findViewById<View>(R.id.update_product_button)!!.background.alpha = 60
+            bottomSheetDialogUpdate.findViewById<View>(R.id.update_product_button)!!.isEnabled = false
+            bottomSheetDialogUpdate.findViewById<View>(R.id.update_product_cancel)!!.isEnabled = false
             if (validateUpdate()) {
             val product = Product(
                 ForValidations.removeBlanks(bottomSheetViewUpdate.findViewById<EditText>(R.id.update_product_name).text.toString()),
@@ -239,10 +243,7 @@ class ListProductFragment: Fragment() {
             } else {
                 apiPutFileWithProduct(product)
             }
-            bottomSheetDialogUpdate.dismiss()
-            //apiGetProducts()
-        }
-
+            }
         }
 
         bottomSheetViewUpdate.findViewById<TextView>(R.id.update_product_image_button).setOnClickListener {
@@ -357,7 +358,11 @@ class ListProductFragment: Fragment() {
                 if(response.isSuccessful && response.body() != null ){
                     ArraysForClass.arrayProducts.add(response.body()!!)
                     apiGetProducts()
+                    bottomSheetDialogRegister.findViewById<View>(R.id.register_product_button)!!.background.alpha = 255
+                    bottomSheetDialogRegister.findViewById<View>(R.id.register_product_button)!!.isEnabled = true
+                    bottomSheetDialogRegister.findViewById<View>(R.id.register_product_cancel)!!.isEnabled = true
                     ForMessages.showSuccessMotionToast(fragment,"Producto Registrado","Se registró correctamente")
+                    bottomSheetDialogRegister.dismiss()
                 }else{
                     ForMessages.showDeleteMotionToast(fragment,"Producto No Registrado", "Hubo un error al registrar el producto")
                 }
@@ -382,10 +387,13 @@ class ListProductFragment: Fragment() {
                     )
                     ArraysForClass.arrayProducts.removeAt(position)
                     ArraysForClass.arrayProducts.add(position, response.body()!!)
-
-
+                    bottomSheetDialogUpdate.findViewById<View>(R.id.update_product_button)!!.background.alpha = 255
+                    bottomSheetDialogUpdate.findViewById<View>(R.id.update_product_button)!!.isEnabled = true
+                    bottomSheetDialogUpdate.findViewById<View>(R.id.update_product_cancel)!!.isEnabled = true
                     ForMessages.showSuccessMotionToast(fragment, "Producto Actualizado", "Se actualizó correctamente")
                     apiGetProducts()
+                    bottomSheetDialogUpdate.dismiss()
+
                 } else{
                     ForMessages.showErrorMotionToast(fragment, "Producto No Actualizado", "Hubo un error al actualizar el producto")
                 }

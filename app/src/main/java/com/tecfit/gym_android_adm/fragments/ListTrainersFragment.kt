@@ -161,6 +161,9 @@ class ListTrainersFragment: Fragment() {
         bottomSheetViewRegister  = layoutInflater.inflate(R.layout.bottom_sheet_dialog, null)
 
         bottomSheetViewRegister.findViewById<View>(R.id.register_trainer_button).setOnClickListener{
+            bottomSheetDialogRegister.findViewById<View>(R.id.register_trainer_button)!!.background.alpha = 60
+            bottomSheetDialogRegister.findViewById<View>(R.id.register_trainer_button)!!.isEnabled = false
+            bottomSheetDialogRegister.findViewById<View>(R.id.register_trainer_cancel)!!.isEnabled = false
             if (validateRegister()){
                 println("Pasamos las validaciones")
                 val trainer = Trainer(
@@ -171,7 +174,6 @@ class ListTrainersFragment: Fragment() {
                     File("", 0)
                     )
                 apiPostTrainerWithFile(trainer)
-                bottomSheetDialogRegister.dismiss()
             }
 
         }
@@ -208,6 +210,9 @@ class ListTrainersFragment: Fragment() {
         }
 
         bottomSheetViewUpdate.findViewById<TextView>(R.id.update_trainer_save).setOnClickListener {
+            bottomSheetDialogUpdate.findViewById<View>(R.id.update_trainer_save)!!.background.alpha = 60
+            bottomSheetDialogUpdate.findViewById<View>(R.id.update_trainer_save)!!.isEnabled = false
+            bottomSheetDialogUpdate.findViewById<View>(R.id.update_trainer_cancel)!!.isEnabled = false
             if (validateUpdate()){
                 val trainer = Trainer(
                     ForValidations.removeBlanks(bottomSheetViewUpdate.findViewById<EditText>(R.id.update_trainer_name).text.toString()),
@@ -223,11 +228,8 @@ class ListTrainersFragment: Fragment() {
                     apiPutFileWithTrainer(trainer)
 
                 }
-                bottomSheetDialogUpdate.dismiss()
+
             }
-
-
-            bottomSheetDialogUpdate.dismiss()
         }
 
         bottomSheetViewUpdate.findViewById<TextView>(R.id.update_trainer_image_button).setOnClickListener {
@@ -366,6 +368,10 @@ class ListTrainersFragment: Fragment() {
                     ArraysForClass.arrayTrainers.removeAt(position)
                     ArraysForClass.arrayTrainers.add(position, response.body()!!)
                     initRecyclerView(R.id.recyclerview_trainers)
+                    bottomSheetDialogUpdate.findViewById<View>(R.id.update_trainer_save)!!.background.alpha = 255
+                    bottomSheetDialogUpdate.findViewById<View>(R.id.update_trainer_save)!!.isEnabled = true
+                    bottomSheetDialogUpdate.findViewById<View>(R.id.update_trainer_cancel)!!.isEnabled = true
+                    bottomSheetDialogUpdate.dismiss()
 
                     ForMessages.showSuccessMotionToast(fragment, "Entrenador Actualizado", "Se actualizó correctamente")
                 } else{
@@ -412,6 +418,10 @@ class ListTrainersFragment: Fragment() {
                     ArraysForClass.arrayTrainers.add(response.body()!!)
                     initRecyclerView(R.id.recyclerview_trainers)
                     ForMessages.showSuccessMotionToast(fragment, "Entrenador Registrado", "Se registró correctamente")
+                    bottomSheetDialogRegister.findViewById<View>(R.id.register_trainer_button)!!.background.alpha = 255
+                    bottomSheetDialogRegister.findViewById<View>(R.id.register_trainer_button)!!.isEnabled = true
+                    bottomSheetDialogRegister.findViewById<View>(R.id.register_trainer_cancel)!!.isEnabled = true
+                    bottomSheetDialogRegister.dismiss()
                 } else{
                     ForMessages.showErrorMotionToast(fragment, "Entrenador No Registrado", "Hubo un error al registrar el entrenador")
                 }

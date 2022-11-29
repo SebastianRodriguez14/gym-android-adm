@@ -28,6 +28,12 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorSecondaryVariant</item>
 
     </style>
+
+    <style name="ProfileUserPage" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <item name="colorSecondary">@color/green</item> <!-- For switch -->
+
+    </style>
     
     <style name="BottonSheetDialog" parent="Theme.Design.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/BottonSheetDialog</item>

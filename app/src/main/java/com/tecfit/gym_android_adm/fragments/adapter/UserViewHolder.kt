@@ -5,13 +5,18 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.tecfit.gym_android_adm.R
+import com.tecfit.gym_android_adm.activities.utilities.ForFragments
+import com.tecfit.gym_android_adm.fragments.DetailsUserFragment
 import com.tecfit.gym_android_adm.models.User
 
-class UserViewHolder (val view: View, val bottomSheetDialogDetails: BottomSheetDialog) : RecyclerView.ViewHolder(view){
+private var detailsUserFragment = DetailsUserFragment()
+
+class UserViewHolder (val view: View, val bottomSheetDialogDetails: BottomSheetDialog, val manager:FragmentManager?) : RecyclerView.ViewHolder(view){
 
     val user_item = view.findViewById<LinearLayout>(R.id.item_user)
 
@@ -28,8 +33,7 @@ class UserViewHolder (val view: View, val bottomSheetDialogDetails: BottomSheetD
 
 
         user_item.setOnClickListener{
-
-            bottomSheetDialogDetails.show()
+            ForFragments.replaceInFragment(detailsUserFragment, manager)
         }
     }
 

@@ -1,17 +1,19 @@
 package com.tecfit.gym_android_adm.fragments.adapter
 
-import android.telecom.Call.Details
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.tecfit.gym_android_adm.R
+import com.tecfit.gym_android_adm.activities.utilities.ForFragments
+import com.tecfit.gym_android_adm.fragments.DetailsUserFragment
 import com.tecfit.gym_android_adm.models.User
+import com.tecfit.gym_android_adm.models.custom.SelectedClass
 
-class UserViewHolder (val view: View, val bottomSheetDialogDetails: BottomSheetDialog) : RecyclerView.ViewHolder(view){
+class UserViewHolder (val view: View, val manager: FragmentManager?) : RecyclerView.ViewHolder(view){
 
     val user_item = view.findViewById<LinearLayout>(R.id.item_user)
 
@@ -26,10 +28,12 @@ class UserViewHolder (val view: View, val bottomSheetDialogDetails: BottomSheetD
 
         if(user.membership!=true){ user_status.visibility=View.INVISIBLE }
 
+        val detailsUserFragment=DetailsUserFragment()
 
         user_item.setOnClickListener{
-
-            bottomSheetDialogDetails.show()
+            SelectedClass.userSelected= user
+            ForFragments.replaceInFragment(detailsUserFragment,manager)
+            //bottomSheetDialogDetails.show()
         }
     }
 

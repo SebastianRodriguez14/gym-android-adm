@@ -1,5 +1,7 @@
 package com.tecfit.gym_android_adm.models
 
+import java.util.*
+
 data class Membership(
-     val start_date: String, val expiration_date:String, var payment:Double, val user: UserCustom
+     val id_membership:Int, var start_date: Date, var expiration_date: Date, val payment:Double
 )

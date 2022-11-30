@@ -25,6 +25,7 @@
                 android:textSize="15sp"
                 />
             <TextView
+                android:id="@+id/info_user_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="951125425"
@@ -49,6 +50,7 @@
                 android:textSize="15sp"
                 />
             <TextView
+                android:id="@+id/info_user_time_membership"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -60,33 +62,9 @@
                 android:textSize="15sp"
                 />
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginVertical="5dp"
-            >
-            <TextView
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Membresía:"
-                android:fontFamily="@font/poppins"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                />
-            <com.google.android.material.switchmaterial.SwitchMaterial
-                android:id="@+id/profile_user_switch_notification"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:checked="false"
-                android:enabled="false"
-                android:theme="@style/ProfileUserPage"
-                tools:ignore="TouchTargetSizeCheck"
-                android:layout_gravity="right"/>
-        </LinearLayout>
 
         <TextView
+            android:id="@+id/info_user_btn_option"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="ACTIVAR MEMBRESIA"

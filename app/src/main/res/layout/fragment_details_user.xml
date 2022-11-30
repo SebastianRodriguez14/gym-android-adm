@@ -30,6 +30,7 @@
                 android:scaleType="centerCrop"/>
         </com.google.android.material.card.MaterialCardView>
         <TextView
+            android:id="@+id/detail_user_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -41,7 +42,7 @@
             />
 
         <LinearLayout
-            android:id="@+id/profile_user_active_membership"
+            android:id="@+id/detail_activo_membership"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center_horizontal"

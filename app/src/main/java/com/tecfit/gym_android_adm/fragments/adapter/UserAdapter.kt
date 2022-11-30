@@ -8,11 +8,12 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.tecfit.gym_android_adm.R
 import com.tecfit.gym_android_adm.models.User
 
-class UserAdapter(private val userList:List<User>, val bottomSheetDialogDetails: BottomSheetDialog, val manager: FragmentManager?) : RecyclerView.Adapter<UserViewHolder>() {
+class UserAdapter(private val userList:List<User>, val manager: FragmentManager?) : RecyclerView.Adapter<UserViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType:Int):UserViewHolder{
         val layoutInflater = LayoutInflater.from(parent.context)
-        return UserViewHolder(layoutInflater.inflate(R.layout.item_users,parent,false), bottomSheetDialogDetails, manager)
+        return UserViewHolder(layoutInflater.inflate(R.layout.item_users,parent,false), manager)
+
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position:Int) {

@@ -9,7 +9,6 @@ class ArraysForClass {
     companion object{
         var arrayProducts: MutableList<Product> = mutableListOf()
         var arrayTrainers: MutableList<Trainer> = mutableListOf()
-
     }
 
 }

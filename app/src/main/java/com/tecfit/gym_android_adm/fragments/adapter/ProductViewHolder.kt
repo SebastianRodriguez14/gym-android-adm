@@ -14,13 +14,15 @@ import com.tecfit.gym_android_adm.R
 import com.tecfit.gym_android_adm.models.Product
 import com.tecfit.gym_android_adm.models.custom.SelectedClass
 
-class ProductViewHolder(val view:View, val bottomSheetDialoUpdate: BottomSheetDialog) :RecyclerView.ViewHolder(view){
+class ProductViewHolder(val view:View, val bottomSheetDialoUpdate: BottomSheetDialog, val bottomSheetDialogDelete:BottomSheetDialog) :RecyclerView.ViewHolder(view){
     val pr_image = view.findViewById<ImageView>(R.id.item_product_image)
     val pr_description = view.findViewById<TextView>(R.id.item_product_description)
     val pr_price = view.findViewById<TextView>(R.id.item_product_price)
     val pr_status_background = view.findViewById<FrameLayout>(R.id.item_product_status_background)
     val pr_status = view.findViewById<LinearLayout>(R.id.item_product_status)
     val pr_discount = view.findViewById<TextView>(R.id.item_product_discount)
+
+    val btn_delete_product = view.findViewById<TextView>(R.id.btn_delete_product)
 
 
     fun render(product: Product) {
@@ -51,6 +53,10 @@ class ProductViewHolder(val view:View, val bottomSheetDialoUpdate: BottomSheetDi
         pr_image.setOnClickListener {
             SelectedClass.productSelected = product
             bottomSheetDialoUpdate.show()
+        }
+
+        btn_delete_product.setOnClickListener{
+            bottomSheetDialogDelete.show()
         }
 
 

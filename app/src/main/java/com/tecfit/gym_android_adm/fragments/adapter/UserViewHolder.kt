@@ -15,6 +15,7 @@ import com.tecfit.gym_android_adm.models.custom.SelectedClass
 
 class UserViewHolder (val view: View, val manager: FragmentManager?) : RecyclerView.ViewHolder(view){
 
+
     val user_item = view.findViewById<LinearLayout>(R.id.item_user)
 
     val user_image=view.findViewById<ImageView>(R.id.item_user_image)
@@ -31,9 +32,11 @@ class UserViewHolder (val view: View, val manager: FragmentManager?) : RecyclerV
         val detailsUserFragment=DetailsUserFragment()
 
         user_item.setOnClickListener{
+
             SelectedClass.userSelected= user
             ForFragments.replaceInFragment(detailsUserFragment,manager)
             //bottomSheetDialogDetails.show()
+
         }
     }
 

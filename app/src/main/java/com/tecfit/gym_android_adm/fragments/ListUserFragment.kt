@@ -201,7 +201,11 @@ class ListUserFragment : Fragment() {
         val recyclerView = root.findViewById<RecyclerView>(id)
 
         recyclerView.layoutManager = LinearLayoutManager(root.context)
+
         recyclerView.adapter=UserAdapter(usersList, fragmentManager )
+
+        recyclerView.adapter=UserAdapter(usersList, bottomSheetDialogDetails, fragmentManager)
+
     }
 
     private fun apiGetUsers(){

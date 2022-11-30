@@ -13,6 +13,7 @@ class UserAdapter(private val userList:List<User>, val manager: FragmentManager?
     override fun onCreateViewHolder(parent: ViewGroup, viewType:Int):UserViewHolder{
         val layoutInflater = LayoutInflater.from(parent.context)
         return UserViewHolder(layoutInflater.inflate(R.layout.item_users,parent,false), manager)
+
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position:Int) {

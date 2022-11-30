@@ -7,16 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
-import com.tecfit.gym_android_adm.activities.utilities.ForFragments
-import com.tecfit.gym_android_adm.databinding.FragmentDetailsUserBinding
 import com.tecfit.gym_android_adm.models.User
 import com.tecfit.gym_android_adm.models.custom.SelectedClass
+import com.tecfit.gym_android_adm.R
+import com.tecfit.gym_android_adm.activities.utilities.ForFragments
+import com.tecfit.gym_android_adm.databinding.BottomSheetDialogRegisterProductBinding
+import com.tecfit.gym_android_adm.databinding.FragmentDetailsUserBinding
 
 class DetailsUserFragment : Fragment() {
 
     lateinit var binding: FragmentDetailsUserBinding
     private val infoUserFragment = InfoUserFragment()
+
     private lateinit var user: User
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +34,7 @@ class DetailsUserFragment : Fragment() {
 
         binding = FragmentDetailsUserBinding.inflate(layoutInflater)
         ForFragments.replaceFragment(childFragmentManager, binding.frameDetailsUser.id, infoUserFragment )
+
 
        detailUser()
 

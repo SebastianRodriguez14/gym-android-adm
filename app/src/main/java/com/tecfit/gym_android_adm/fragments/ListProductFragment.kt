@@ -62,6 +62,9 @@ class ListProductFragment: Fragment() {
     private lateinit var bottomSheetViewUpdate: View
     private var uriImageUpdate: Uri? = null
 
+    private lateinit var bottomSheetDialogDelete:BottomSheetDialog
+    private lateinit var bottomSheetViewDelete:View
+
     private lateinit var fragment: Fragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,6 +79,7 @@ class ListProductFragment: Fragment() {
         root = inflater.inflate(R.layout.fragment_products, container, false)
         binding = FragmentProductsBinding.inflate(inflater)
         createUpdateDialog()
+        createDeleteDialog()
         val gridLayoutManager = GridLayoutManager(root.context, 2)
         gridLayoutManager.widthMode
         binding.recyclerviewProducts.layoutManager = gridLayoutManager
@@ -113,7 +117,14 @@ class ListProductFragment: Fragment() {
         }
     }
 
-
+    private fun createDeleteDialog(){
+        bottomSheetDialogDelete = BottomSheetDialog(requireActivity(), R.style.BottonSheetDialog)
+        bottomSheetViewDelete = layoutInflater.inflate(R.layout.bottom_sheet_dialog_delete_product, null)
+        bottomSheetDialogDelete.setContentView(bottomSheetViewDelete)
+        bottomSheetViewDelete.findViewById<TextView>(R.id.delete_product_cancel).setOnClickListener {
+            bottomSheetDialogDelete.dismiss()
+        }
+    }
 
     private fun apiGetProducts() {
 
@@ -252,22 +263,16 @@ class ListProductFragment: Fragment() {
     }
 
     private fun setArrayForRecycler(filter: Boolean = false) {
-        println("a")
         var products = if (!filter) ArraysForClass.arrayProducts else FilterProducts.applyFilters(
             ArraysForClass.arrayProducts
         )
 
-        binding.recyclerviewProducts.adapter = ProductAdapter(products, bottomSheetDialogUpdate)
+        binding.recyclerviewProducts.adapter = ProductAdapter(products, bottomSheetDialogUpdate, bottomSheetDialogDelete)
 
         binding.productsListLinear.isVisible = products.isNotEmpty()
         binding.productsListVoidLinear.isVisible = products.isEmpty()
     }
 
-    private fun initRecyclerView(id: Int) {
-        val recyclerView = root.findViewById<RecyclerView>(id)
-        recyclerView.layoutManager = LinearLayoutManager(root.context)
-        recyclerView.adapter = ProductAdapter(ArraysForClass.arrayProducts, bottomSheetDialogUpdate)
-    }
 
     private fun checkPermissionsForGalery(type: Int) {
         //Verificación de la versión de android

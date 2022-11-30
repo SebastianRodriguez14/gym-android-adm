@@ -7,11 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.tecfit.gym_android_adm.R
+
 import com.tecfit.gym_android_adm.activities.utilities.ForFragments
 import com.tecfit.gym_android_adm.databinding.FragmentInfoUserBinding
 import com.tecfit.gym_android_adm.models.User
 import com.tecfit.gym_android_adm.models.UserInAppCustom.Companion.user
 import com.tecfit.gym_android_adm.models.custom.SelectedClass
+import com.tecfit.gym_android_adm.databinding.FragmentProductsBinding
+
 
 class InfoUserFragment : Fragment() {
 
@@ -45,4 +48,8 @@ class InfoUserFragment : Fragment() {
 
         }
     }
+
+        return binding.root
+    }
+
 }

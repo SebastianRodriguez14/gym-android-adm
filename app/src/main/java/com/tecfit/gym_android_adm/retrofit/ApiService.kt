@@ -7,11 +7,6 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
-import java.lang.reflect.Member
 
 
 interface ApiService {
@@ -57,4 +52,6 @@ interface ApiService {
     @POST("membership/save/{id}")
     fun postMembership(@Path("id") id: Int, @Body membership: MembershipCustom):Call<Membership>
 
+    @DELETE("product/delete/{id}")
+    fun deleteProduct(@Path("id")id:Int):Call<Void>
 }

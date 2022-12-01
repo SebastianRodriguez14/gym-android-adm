@@ -12,26 +12,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.tecfit.gym_android_adm.R
 import com.tecfit.gym_android_adm.activities.utilities.ForMessages
 import com.tecfit.gym_android_adm.activities.utilities.ForValidations
-import com.tecfit.gym_android_adm.databinding.BottomSheetDialogRegisterProductBinding
 import com.tecfit.gym_android_adm.databinding.FragmentProductsBinding
 import com.tecfit.gym_android_adm.fragments.adapter.ProductAdapter
 import com.tecfit.gym_android_adm.models.File
 import com.tecfit.gym_android_adm.models.Product
-import com.tecfit.gym_android_adm.models.Trainer
 import com.tecfit.gym_android_adm.models.custom.ArraysForClass
 import com.tecfit.gym_android_adm.models.custom.SelectedClass
 import com.tecfit.gym_android_adm.retrofit.ApiService
@@ -40,7 +35,6 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
-import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -91,6 +85,13 @@ class ListProductFragment: Fragment() {
         }
         fragment = this
 
+        bottomSheetDialogDelete.findViewById<View>(R.id.delete_product_delete)?.setOnClickListener {
+            bottomSheetDialogDelete.findViewById<View>(R.id.delete_product_delete)!!.background.alpha=60
+            bottomSheetDialogDelete.findViewById<View>(R.id.delete_product_delete)!!.isEnabled=false
+            bottomSheetDialogDelete.findViewById<View>(R.id.delete_product_cancel)!!.isEnabled=false
+            deleteTrainer(SelectedClass.productSelected.id_product)
+        }
+
         binding.btnAddProduct.setOnClickListener {
             createRegisterDialog()
         }
@@ -99,6 +100,29 @@ class ListProductFragment: Fragment() {
         return binding.root
 
     }
+
+    private fun deleteTrainer(id:Int) {
+        val apiService: ApiService = RetrofitAdmin.getRetrofit().create(ApiService::class.java)
+
+        val resultProducts: Call<Void> =apiService.deleteProduct(id)
+
+        resultProducts.enqueue(object :Callback<Void>{
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                bottomSheetDialogDelete.findViewById<View>(R.id.delete_product_delete)!!.background.alpha=255
+                bottomSheetDialogDelete.findViewById<View>(R.id.delete_product_delete)!!.isEnabled=true
+                bottomSheetDialogDelete.findViewById<View>(R.id.delete_product_cancel)!!.isEnabled=true
+                apiGetProducts()
+                bottomSheetDialogDelete.dismiss()
+                ForMessages.showSuccessMotionToast(fragment,"Producto Eliminado","Se eliminó correctamente")
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                println("Error: deleteProduct() failure")
+            }
+        })
+
+    }
+
     class FilterProducts {
         companion object {
             var nameProduct:String = ""

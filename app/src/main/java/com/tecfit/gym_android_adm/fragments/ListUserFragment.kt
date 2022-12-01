@@ -46,7 +46,6 @@ class ListUserFragment : Fragment() {
     private lateinit var bottomSheetDialogDetails:BottomSheetDialog
     private lateinit var bottomSheetViewDetails:View
 
-    private val listDetailsUserFragment=DetailsUserFragment()
 
     private lateinit var auth: FirebaseAuth
     private lateinit var usersList:List<User>
@@ -204,8 +203,6 @@ class ListUserFragment : Fragment() {
 
         recyclerView.adapter=UserAdapter(usersList, fragmentManager )
 
-        recyclerView.adapter=UserAdapter(usersList, bottomSheetDialogDetails, fragmentManager)
-
     }
 
     private fun apiGetUsers(){
@@ -282,7 +279,7 @@ class ListUserFragment : Fragment() {
     }
 
     private fun validationDate():Boolean{
-        var isPass = false
+        var isPass: Boolean
 
         if(membership_start_date.text.isEmpty()){
             membership_start_date.setBackgroundResource(R.drawable.shape_input_error)

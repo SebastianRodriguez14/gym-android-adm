@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_marginTop="20dp"
+    android:background="@color/background"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".fragments.InfoUserFragment"
@@ -168,7 +169,6 @@
                     android:orientation="vertical"
                     >
                     <EditText
-                        android:enabled="false"
                         android:id="@+id/txt_payment"
                         android:textColor="@color/black"
                         android:fontFamily="@font/poppins"
@@ -182,7 +182,7 @@
                     <TextView
                         android:id="@+id/payment_error"
                         android:gravity="center"
-                        android:visibility="visible"
+                        android:visibility="invisible"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Debe ingresar el monto"

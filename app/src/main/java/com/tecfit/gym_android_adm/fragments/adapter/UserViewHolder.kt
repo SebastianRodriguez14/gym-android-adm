@@ -11,6 +11,7 @@ import com.tecfit.gym_android_adm.R
 import com.tecfit.gym_android_adm.activities.utilities.ForFragments
 import com.tecfit.gym_android_adm.fragments.DetailsUserFragment
 import com.tecfit.gym_android_adm.models.User
+import com.tecfit.gym_android_adm.models.UserInAppCustom
 import com.tecfit.gym_android_adm.models.custom.SelectedClass
 
 class UserViewHolder (val view: View, val manager: FragmentManager?) : RecyclerView.ViewHolder(view){

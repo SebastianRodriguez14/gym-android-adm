@@ -1,9 +1,7 @@
 package com.tecfit.gym_android_adm.fragments
 
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.telecom.Call.Details
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +19,6 @@ import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.firebase.auth.FirebaseAuth
 import com.tecfit.gym_android_adm.R
-import com.tecfit.gym_android_adm.activities.utilities.ForFragments
 import com.tecfit.gym_android_adm.activities.utilities.ForValidations
 import com.tecfit.gym_android_adm.databinding.FragmentsUsersBinding
 import com.tecfit.gym_android_adm.fragments.adapter.UserAdapter

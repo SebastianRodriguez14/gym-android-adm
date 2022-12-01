@@ -57,4 +57,7 @@ interface ApiService {
     @POST("membership/save/{id}")
     fun postMembership(@Path("id") id: Int, @Body membership: MembershipCustom):Call<Membership>
 
+    @GET("membership/check/{id_user}")
+    fun getActiveMembershipByUser(@Path("id_user") id_user: Int): Call<Membership>
+
 }

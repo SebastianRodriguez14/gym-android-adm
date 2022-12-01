@@ -203,7 +203,8 @@ class ActivateMembershipFragment :Fragment(){
                     binding.btnActivateMembership.background.alpha = 255
                     binding.btnActivateMembership.isEnabled = true
                     binding.btnActivateMembershipCancel.isEnabled = true
-                    //ForFragments.replaceFragment(childFragmentManager,R.id.frame_container, listUserFragment)
+                    ForFragments.replaceFragment(parentFragmentManager,R.id.frame_details_user, InfoUserFragment())
+
                 }
 
                 override fun onFailure(call: Call<Membership>, t: Throwable) {

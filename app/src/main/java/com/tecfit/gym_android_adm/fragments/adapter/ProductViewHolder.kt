@@ -6,7 +6,6 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -56,6 +55,7 @@ class ProductViewHolder(val view:View, val bottomSheetDialoUpdate: BottomSheetDi
         }
 
         btn_delete_product.setOnClickListener{
+            SelectedClass.productSelected=product
             bottomSheetDialogDelete.show()
         }
 

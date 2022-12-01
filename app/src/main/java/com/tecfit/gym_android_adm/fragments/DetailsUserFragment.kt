@@ -1,18 +1,16 @@
 package com.tecfit.gym_android_adm.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.tecfit.gym_android_adm.activities.utilities.ForFragments
+import com.tecfit.gym_android_adm.databinding.FragmentDetailsUserBinding
 import com.tecfit.gym_android_adm.models.User
 import com.tecfit.gym_android_adm.models.custom.SelectedClass
-import com.tecfit.gym_android_adm.R
-import com.tecfit.gym_android_adm.activities.utilities.ForFragments
-import com.tecfit.gym_android_adm.databinding.BottomSheetDialogRegisterProductBinding
-import com.tecfit.gym_android_adm.databinding.FragmentDetailsUserBinding
 
 class DetailsUserFragment : Fragment() {
 

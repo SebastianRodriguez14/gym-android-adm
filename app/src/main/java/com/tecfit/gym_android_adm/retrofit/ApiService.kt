@@ -1,6 +1,8 @@
 package com.tecfit.gym_android_adm.retrofit
 
 import com.tecfit.gym_android_adm.models.*
+import com.tecfit.gym_android_adm.models.custom.MembershipCustom
+import com.tecfit.gym_android_adm.models.custom.MembershipRegister
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -27,7 +29,7 @@ interface ApiService {
     fun getTrainers(): Call<List<Trainer>>
 
     @POST("membership/saveWithUser")
-    fun saveMembershipWithUser(@Body membership: Membership): Call<Membership>
+    fun saveMembershipWithUser(@Body membership: MembershipRegister): Call<Membership>
 
     @Multipart
     @PUT("file/put")
@@ -52,5 +54,7 @@ interface ApiService {
     @PUT("product/put/{idProduct}")
     fun putProduct(@Body product: Product, @Path("idProduct") idProduct:Int):Call<Product>
 
+    @POST("membership/save/{id}")
+    fun postMembership(@Path("id") id: Int, @Body membership: MembershipCustom):Call<Membership>
 
 }

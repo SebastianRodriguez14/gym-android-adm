@@ -18,6 +18,7 @@ class DetailsUserFragment : Fragment() {
 
     lateinit var binding: FragmentDetailsUserBinding
     private val infoUserFragment = InfoUserFragment()
+    private val activateMembershipFragment = ActivateMembershipFragment()
 
     private lateinit var user: User
 
@@ -34,11 +35,11 @@ class DetailsUserFragment : Fragment() {
 
         binding = FragmentDetailsUserBinding.inflate(layoutInflater)
         ForFragments.replaceFragment(childFragmentManager, binding.frameDetailsUser.id, infoUserFragment )
-
-
        detailUser()
 
-
+        binding.infoUserBtnOption.setOnClickListener{
+            ForFragments.replaceFragment(childFragmentManager, binding.frameDetailsUser.id, activateMembershipFragment   )
+        }
         return binding.root
 
     }

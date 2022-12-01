@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import com.tecfit.gym_android_adm.R
 
 import com.tecfit.gym_android_adm.activities.utilities.ForFragments
+import com.tecfit.gym_android_adm.databinding.FragmentDetailsUserBinding
 import com.tecfit.gym_android_adm.databinding.FragmentInfoUserBinding
 import com.tecfit.gym_android_adm.models.User
 import com.tecfit.gym_android_adm.models.UserInAppCustom.Companion.user
@@ -19,6 +20,7 @@ import com.tecfit.gym_android_adm.databinding.FragmentProductsBinding
 class InfoUserFragment : Fragment() {
 
     lateinit var binding: FragmentInfoUserBinding
+    val activateMembershipFragment = ActivateMembershipFragment()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +32,6 @@ class InfoUserFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentInfoUserBinding.inflate(layoutInflater)
-
         infoUser()
 
         return binding.root
@@ -44,12 +45,6 @@ class InfoUserFragment : Fragment() {
 
         binding.infoUserPhone.text= user!!.phone
 
-        binding.infoUserBtnOption.setOnClickListener{
 
-        }
     }
-
-        return binding.root
-    }
-
 }

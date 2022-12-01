@@ -23,11 +23,13 @@ import com.google.firebase.auth.FirebaseAuth
 import com.tecfit.gym_android_adm.R
 import com.tecfit.gym_android_adm.activities.utilities.ForFragments
 import com.tecfit.gym_android_adm.activities.utilities.ForValidations
+import com.tecfit.gym_android_adm.databinding.FragmentsUsersBinding
 import com.tecfit.gym_android_adm.fragments.adapter.UserAdapter
 import com.tecfit.gym_android_adm.models.File
 import com.tecfit.gym_android_adm.models.Membership
 import com.tecfit.gym_android_adm.models.User
 import com.tecfit.gym_android_adm.models.UserCustom
+import com.tecfit.gym_android_adm.models.custom.MembershipRegister
 import com.tecfit.gym_android_adm.retrofit.ApiService
 import com.tecfit.gym_android_adm.retrofit.RetrofitAdmin
 import retrofit2.Call
@@ -46,6 +48,8 @@ class ListUserFragment : Fragment() {
     private lateinit var bottomSheetDialogDetails:BottomSheetDialog
     private lateinit var bottomSheetViewDetails:View
 
+
+    lateinit var binding: FragmentsUsersBinding
 
     private lateinit var auth: FirebaseAuth
     private lateinit var usersList:List<User>
@@ -88,6 +92,7 @@ class ListUserFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         root=inflater.inflate(R.layout.fragments_users,container,false)
+        binding = FragmentsUsersBinding.inflate(layoutInflater)
         apiGetUsers()
         createDetailsDialog()
         addButton=root.findViewById(R.id.btn_add_user)
@@ -169,7 +174,11 @@ class ListUserFragment : Fragment() {
 
             bottomSheetView.findViewById<View>(R.id.btn_register_user).setOnClickListener {
                 if(validationDate() && validationRegister()){
+                    binding.btnAddUser.background.alpha = 60
+                    binding.btnAddUser.isEnabled = false
+                    binding.btnAddUser.isEnabled = false
                     registerUserFirebase(txtEmail.text.toString(), txtPassword.text.toString())
+                    registerUser()
                     bottomSheetDialog.dismiss()
 
                 }
@@ -225,34 +234,37 @@ class ListUserFragment : Fragment() {
         })
     }
 
-//    private fun registerUser(){
-//
-//        if(txtPayment.isEnabled){
-//            payment = txtPayment.text.toString().toDouble()
-//        }
-//
-//         val membership = Membership(start_date, expiry_date,payment, UserCustom(txtEmail.text.toString(),
-//         txtPassword.text.toString(),txtNames.text.toString(), txtLastname.text.toString(), txtPhone.text.toString(),
-//         File("https://res.cloudinary.com/dfh14vom7/image/upload/v1668617884/xsdguuvlt17mzub3dzkj.png", 22)))
-//
-//        val apiService:ApiService= RetrofitAdmin.getRetrofit().create(ApiService::class.java)
-//        apiService.saveMembershipWithUser(membership).enqueue(
-//            object : Callback<Membership>{
-//                override fun onFailure(call: Call<Membership>, t: Throwable) {
-//                    Toast.makeText(root.context, "No se pudo registrar al usuario", Toast.LENGTH_SHORT).show()
-//
-//                }
-//
-//                override fun onResponse(call: Call<Membership>, response: Response<Membership>) {
-//                    val addedUser = response.body()
-//                    MotionToast.createColorToast(requireActivity(), "Usuario Registrado",
-//                        "Se registró correctamente", MotionToastStyle.SUCCESS, MotionToast.GRAVITY_BOTTOM, MotionToast.SHORT_DURATION, null )
-//                    println(addedUser.toString())
-//                    apiGetUsers()
-//                }
-//            }
-//        )
-//    }
+    private fun registerUser(){
+
+        if(txtPayment.isEnabled){
+            payment = txtPayment.text.toString().toDouble()
+        }
+
+         val membership = MembershipRegister(start_date, expiry_date,payment, UserCustom(txtEmail.text.toString(),
+         txtPassword.text.toString(),txtNames.text.toString(), txtLastname.text.toString(), txtPhone.text.toString(),
+         File("https://res.cloudinary.com/dfh14vom7/image/upload/v1668617884/xsdguuvlt17mzub3dzkj.png", 22)))
+
+        val apiService:ApiService= RetrofitAdmin.getRetrofit().create(ApiService::class.java)
+        apiService.saveMembershipWithUser(membership).enqueue(
+            object : Callback<Membership>{
+                override fun onFailure(call: Call<Membership>, t: Throwable) {
+                    Toast.makeText(root.context, "No se pudo registrar al usuario", Toast.LENGTH_SHORT).show()
+
+                }
+
+                override fun onResponse(call: Call<Membership>, response: Response<Membership>) {
+                    val addedUser = response.body()
+                    MotionToast.createColorToast(requireActivity(), "Usuario Registrado",
+                        "Se registró correctamente", MotionToastStyle.SUCCESS, MotionToast.GRAVITY_BOTTOM, MotionToast.SHORT_DURATION, null )
+                    println(addedUser.toString())
+                    binding.btnAddUser.background.alpha = 255
+                    binding.btnAddUser.isEnabled = true
+                    binding.btnAddUser.isEnabled = true
+                    apiGetUsers()
+                }
+            }
+        )
+    }
 
     private fun registerUserFirebase(email: String, password: String){
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener{

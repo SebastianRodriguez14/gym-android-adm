@@ -2,6 +2,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:paddingVertical="25dp"
+    android:paddingHorizontal="28dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
@@ -10,30 +12,29 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="25dp"
-        android:paddingHorizontal="28dp"
-        android:orientation="vertical">
-    <LinearLayout
-        android:id="@+id/title_users"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:gravity="center">
-        <TextView
+        <LinearLayout
+            android:id="@+id/title_users"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/michroma"
-            android:gravity="bottom"
-            android:paddingRight="25dp"
-            android:paddingBottom="10dp"
-            android:text="Listado de Usuarios"
-            android:textColor="@color/nero"
-            android:textSize="20dp" />
+            android:gravity="center">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/michroma"
+                android:gravity="bottom"
+                android:paddingRight="25dp"
+                android:paddingBottom="10dp"
+                android:text="Listado de Usuarios"
+                android:textColor="@color/nero"
+                android:textSize="20dp" />
+        </LinearLayout>
     </LinearLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:hint=" "
         android:layout_width="match_parent"
         android:layout_height="42dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="50dp"
         app:startIconTint="#CBCBCB"
         app:hintTextColor="#CBCBCB"
         app:startIconDrawable="@drawable/ic_baseline_search_24"
@@ -41,6 +42,7 @@
         >
 
         <EditText
+            android:id="@+id/user_input_name"
             android:layout_width="match_parent"
             android:layout_height="38dp"
             android:layout_gravity="center_vertical"
@@ -52,74 +54,99 @@
             tools:ignore="TouchTargetSizeCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="100dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical|start">
+            <LinearLayout
+                android:id="@+id/btn_add_user"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_input_register_user">
+                <ImageView
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/icon_add"/>
+                <TextView
+                    android:id="@+id/text_register"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="3dp"
+                    android:textAlignment="center"
+                    android:layout_marginHorizontal="4dp"
+                    android:paddingHorizontal="6dp"
+                    android:textSize="12dp"
+                    android:textColor="?colorSecondaryVariant"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Registrar"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="5dp">
-            <LinearLayout
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical|end">
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center_vertical|start">
-                <LinearLayout
-                    android:id="@+id/btn_add_user"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/shape_input_register_user">
-                    <ImageView
-                        android:layout_width="12dp"
-                        android:layout_height="12dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_gravity="center_vertical"
-                        android:background="@drawable/icon_add"/>
-                    <TextView
-                        android:id="@+id/text_register"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingVertical="3dp"
-                        android:textAlignment="center"
-                        android:layout_marginHorizontal="4dp"
-                        android:paddingHorizontal="6dp"
-                        android:textSize="12dp"
-                        android:textColor="?colorSecondaryVariant"
-                        android:fontFamily="@font/poppins_regular"
-                        android:text="Registrar"/>
-                </LinearLayout>
+                android:fontFamily="@font/poppins"
+                android:text="Activos"
+                android:layout_marginEnd="5dp"
+                android:textSize="13dp"
 
+                />
 
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center_vertical|end">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins"
-                    android:text="Activos"
-                    android:layout_marginEnd="5dp"
-                    android:textSize="13dp"
-
-                    />
-
-                <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:checked="true"
-                    tools:ignore="TouchTargetSizeCheck" />
-            </LinearLayout>
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/users_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="22dp"
+                android:checked="false"
+                app:background="@null"
+                tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview_users"
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/users_list_linear"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        tools:listitem="@layout/item_users"/>
+        android:layout_height="match_parent"
+        android:layout_marginTop="150dp"
+        android:visibility="visible"
+        android:gravity="center"
+        >
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_users"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_users"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/users_list_void_linear"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:orientation="vertical"
+        android:visibility="invisible"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/user_list_void_message"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            />
+
     </LinearLayout>
 
 </FrameLayout>

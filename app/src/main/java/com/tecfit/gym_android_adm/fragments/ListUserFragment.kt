@@ -2,6 +2,8 @@ package com.tecfit.gym_android_adm.fragments
 
 import android.os.Build
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,13 +12,15 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.firebase.auth.FirebaseAuth
 import com.tecfit.gym_android_adm.R
 import com.tecfit.gym_android_adm.activities.utilities.ForValidations
@@ -26,6 +30,7 @@ import com.tecfit.gym_android_adm.models.File
 import com.tecfit.gym_android_adm.models.Membership
 import com.tecfit.gym_android_adm.models.User
 import com.tecfit.gym_android_adm.models.UserCustom
+import com.tecfit.gym_android_adm.models.custom.ArraysForClass
 import com.tecfit.gym_android_adm.models.custom.MembershipRegister
 import com.tecfit.gym_android_adm.retrofit.ApiService
 import com.tecfit.gym_android_adm.retrofit.RetrofitAdmin
@@ -44,12 +49,15 @@ class ListUserFragment : Fragment() {
 
     private lateinit var bottomSheetDialogDetails:BottomSheetDialog
     private lateinit var bottomSheetViewDetails:View
+    private lateinit var recyclerView: RecyclerView
 
+    private lateinit var listUsersLinearLayout:LinearLayout
+    private lateinit var listUsersVoidLinearLayout: LinearLayout
 
     lateinit var binding: FragmentsUsersBinding
 
     private lateinit var auth: FirebaseAuth
-    private lateinit var usersList:List<User>
+   // private lateinit var usersList:List<User>
     private lateinit var root:View
     private lateinit var addButton:LinearLayout
     private lateinit var textOnemes:TextView
@@ -65,6 +73,7 @@ class ListUserFragment : Fragment() {
     private lateinit var txtPassword: EditText
     private lateinit var membership_start_date:EditText
     private lateinit var txtPayment:EditText
+    private lateinit var switch: SwitchMaterial
 
     private lateinit var errorName: TextView
     private lateinit var errorLastname: TextView
@@ -77,6 +86,7 @@ class ListUserFragment : Fragment() {
     private lateinit var expiry_date: String
     private var payment by Delegates.notNull<Double>()
 
+    private lateinit var inputNameUser : EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,10 +99,32 @@ class ListUserFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         root=inflater.inflate(R.layout.fragments_users,container,false)
+        recyclerView=root.findViewById(R.id.recyclerview_users)
         binding = FragmentsUsersBinding.inflate(layoutInflater)
         apiGetUsers()
         createDetailsDialog()
         addButton=root.findViewById(R.id.btn_add_user)
+
+        val gridLayoutManager= GridLayoutManager(root.context,1)
+        gridLayoutManager.widthMode
+
+        recyclerView.layoutManager=gridLayoutManager
+        listUsersLinearLayout= root.findViewById(R.id.users_list_linear)
+        listUsersVoidLinearLayout=root.findViewById(R.id.users_list_void_linear)
+
+        if(ArraysForClass.arrayUsers.isEmpty()) {
+            apiGetUsers()
+        }else{
+            setArrayForRecycler()
+        }
+
+        switch=root.findViewById(R.id.users_switch)
+        switch.setOnCheckedChangeListener { buttonView, isChecked->
+            if(ArraysForClass.arrayUsers!=null){
+                FilterUsers.availableUser= isChecked
+                setArrayForRecycler(true)
+            }
+        }
 
         addButton.setOnClickListener{
             val bottomSheetDialog = BottomSheetDialog(
@@ -186,13 +218,39 @@ class ListUserFragment : Fragment() {
             }
             bottomSheetDialog.setContentView(bottomSheetView)
             bottomSheetDialog.show()
+            inputNameUser=root.findViewById(R.id.user_input_name)
+            inputNameUser.addTextChangedListener(object :TextWatcher{
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+                override fun afterTextChanged(s: Editable?) {
+                    if (ArraysForClass.arrayUsers!= null){
+                        FilterUsers.nameUser=s.toString()
+                        setArrayForRecycler(true)
+                    }
+                }
+            })
+
         }
         // Aquï acaba la llamada al modal
         auth = FirebaseAuth.getInstance()
         return root
     }
 
-
+    class FilterUsers{
+        companion object{
+            var nameUser:String=""
+            var availableUser:Boolean=false
+            fun applyFilters(users:List<User>):List<User>{
+                val filteredUsers= users.filter { user ->
+                    val checkName=if(nameUser=="")true else user.name.lowercase().startsWith(nameUser.lowercase())
+                    val checkAvailable= if(availableUser) user.membership else true
+                    checkName && checkAvailable
+                }
+                return filteredUsers
+            }
+        }
+    }
     private fun createDetailsDialog() {
         bottomSheetDialogDetails = BottomSheetDialog(requireActivity(), R.style.BottonSheetDialog)
 
@@ -202,14 +260,26 @@ class ListUserFragment : Fragment() {
         bottomSheetDialogDetails.setContentView(bottomSheetViewDetails)
     }
 
-    private fun initRecyclerView(id:Int){
-        val recyclerView = root.findViewById<RecyclerView>(id)
+    private fun setArrayForRecycler(filter:Boolean = false) {
+        var users = if (!filter) ArraysForClass.arrayUsers else FilterUsers.applyFilters(
+            ArraysForClass.arrayUsers
+        )
+        recyclerView.adapter=UserAdapter(users, fragmentManager )
 
-        recyclerView.layoutManager = LinearLayoutManager(root.context)
-
-        recyclerView.adapter=UserAdapter(usersList, fragmentManager )
-
+        listUsersLinearLayout.isVisible = users.isNotEmpty()
+        listUsersVoidLinearLayout.isVisible = users.isEmpty()
     }
+
+
+//    private fun initRecyclerView(id:Int){
+//       val recyclerView = root.findViewById<RecyclerView>(id)
+//
+//        recyclerView.layoutManager = LinearLayoutManager(root.context)
+//
+//        recyclerView.adapter=UserAdapter(usersList, fragmentManager )
+//
+//        setArrayForRecycler(false)
+//    }
 
     private fun apiGetUsers(){
         val apiService:ApiService= RetrofitAdmin.getRetrofit().create(ApiService::class.java)
@@ -219,8 +289,10 @@ class ListUserFragment : Fragment() {
             override fun onResponse(call: Call<List<User>>,response: Response<List<User>>) {
                 val listUsers=response.body()
                 if(listUsers!=null){
-                    usersList=listUsers.filter { u -> u.email != "gimnasiotecfit2022@gmail.com" }
-                    initRecyclerView(R.id.recyclerview_users)
+                    //usersList=listUsers.filter { u -> u.email != "gimnasiotecfit2022@gmail.com" }
+                   //initRecyclerView(R.id.recyclerview_users)
+                    ArraysForClass.arrayUsers= listUsers as MutableList<User>
+                    setArrayForRecycler()
                 }
             }
 

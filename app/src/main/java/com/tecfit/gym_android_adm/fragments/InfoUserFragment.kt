@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isVisible
 import com.tecfit.gym_android_adm.R
@@ -69,6 +70,7 @@ class InfoUserFragment : Fragment() {
                 }
                 typeMembership()
                 requireParentFragment().requireActivity().findViewById<TextView>(R.id.info_user_btn_option).isVisible=true
+                requireParentFragment().requireActivity().findViewById<ImageView>(R.id.detail_return_list_user).isVisible=true
             }
 
             override fun onFailure(call: Call<Membership>, t: Throwable) {

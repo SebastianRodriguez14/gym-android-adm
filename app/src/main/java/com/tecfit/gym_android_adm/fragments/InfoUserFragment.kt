@@ -63,7 +63,6 @@ class   InfoUserFragment : Fragment() {
                     UserInAppCustom.membership!!.start_date = Date(UserInAppCustom.membership!!.start_date.time + (1000 * 60 * 60 * 24))
                     UserInAppCustom.membership!!.expiration_date = Date(UserInAppCustom.membership!!.expiration_date.time + (1000 * 60 * 60 * 24))
 
-                    requireParentFragment().requireActivity().findViewById<TextView>(R.id.info_user_btn_option).isVisible = false
 
                 } else {
                     UserInAppCustom.membership = Membership(0, Date(), Date(), 0.0)

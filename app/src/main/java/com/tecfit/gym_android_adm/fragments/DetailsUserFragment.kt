@@ -35,9 +35,7 @@ class DetailsUserFragment : Fragment() {
         ForFragments.replaceFragment(childFragmentManager, binding.frameDetailsUser.id, infoUserFragment )
        detailUser()
 
-        binding.infoUserBtnOption.setOnClickListener{
-            ForFragments.replaceFragment(childFragmentManager, binding.frameDetailsUser.id, activateMembershipFragment   )
-        }
+
         return binding.root
 
     }
@@ -52,7 +50,20 @@ class DetailsUserFragment : Fragment() {
         }
         binding.detailUserName.text= user.name+" "+user.lastname
         binding.detailActivoMembership.isVisible= user!!.membership
+        typeMembership()
     }
 
-
+    private fun typeMembership(){
+        if(user.membership!= true){
+            binding.infoUserBtnOption.setText("ACTIVAR MEMBRESIA")
+            binding.infoUserBtnOption.setOnClickListener{
+                ForFragments.replaceFragment(childFragmentManager, binding.frameDetailsUser.id, activateMembershipFragment   )
+            }
+        }else{
+            binding.infoUserBtnOption.setText("EXTENDER MEMBRESIA")
+            binding.infoUserBtnOption.setOnClickListener{
+                println("No me caes Oscar")
+            }
+        }
+    }
 }

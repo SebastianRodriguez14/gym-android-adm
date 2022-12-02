@@ -61,7 +61,7 @@ class ActivateMembershipFragment :Fragment(){
         start_date = LocalDate.now().toString()
         text_selected = binding.textOnemes
         setBackgroundSelected(arrayOptions, binding.textOnemes)
-
+        requireParentFragment().requireActivity().findViewById<TextView>(R.id.info_user_btn_option).isVisible=false
 
         binding.membershipStartDate.setOnClickListener{
             val constraintsBuilder =
@@ -115,7 +115,7 @@ class ActivateMembershipFragment :Fragment(){
         }
         binding.btnActivateMembershipCancel.setOnClickListener {
             ForFragments.replaceFragment(parentFragmentManager,R.id.frame_details_user, InfoUserFragment())
-            bindinDetail.infoUserBtnOption.isVisible=isVisible
+           requireParentFragment().requireActivity().findViewById<TextView>(R.id.info_user_btn_option).isVisible=true
         }
 
         return binding.root

@@ -4,7 +4,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.core.view.isVisible
+import com.tecfit.gym_android_adm.R
 import com.tecfit.gym_android_adm.databinding.FragmentDetailsUserBinding
 import com.tecfit.gym_android_adm.databinding.FragmentInfoUserBinding
 import com.tecfit.gym_android_adm.models.User
@@ -50,7 +52,6 @@ class InfoUserFragment : Fragment() {
 
         binding.infoUserPhone.text= user!!.phone
         membershipUser(user!!.id_user)
-        //bindinDetail.infoUserBtnOption.isVisible=isVisible
     }
 
     private fun membershipUser(id_user:Int){
@@ -67,6 +68,7 @@ class InfoUserFragment : Fragment() {
                     UserInAppCustom.membership = Membership(0, Date(), Date(), 0.0)
                 }
                 typeMembership()
+                requireParentFragment().requireActivity().findViewById<TextView>(R.id.info_user_btn_option).isVisible=true
             }
 
             override fun onFailure(call: Call<Membership>, t: Throwable) {

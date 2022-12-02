@@ -4,6 +4,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.core.view.isVisible
+import com.tecfit.gym_android_adm.R
 import com.tecfit.gym_android_adm.databinding.FragmentInfoUserBinding
 import com.tecfit.gym_android_adm.models.User
 import com.tecfit.gym_android_adm.models.UserInAppCustom.Companion.user
@@ -19,7 +22,7 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 
 
-class InfoUserFragment : Fragment() {
+class   InfoUserFragment : Fragment() {
 
     lateinit var binding: FragmentInfoUserBinding
     val activateMembershipFragment = ActivateMembershipFragment()
@@ -59,6 +62,9 @@ class InfoUserFragment : Fragment() {
                 if (UserInAppCustom.membership != null) {
                     UserInAppCustom.membership!!.start_date = Date(UserInAppCustom.membership!!.start_date.time + (1000 * 60 * 60 * 24))
                     UserInAppCustom.membership!!.expiration_date = Date(UserInAppCustom.membership!!.expiration_date.time + (1000 * 60 * 60 * 24))
+
+                    requireParentFragment().requireActivity().findViewById<TextView>(R.id.info_user_btn_option).isVisible = false
+
                 } else {
                     UserInAppCustom.membership = Membership(0, Date(), Date(), 0.0)
                 }

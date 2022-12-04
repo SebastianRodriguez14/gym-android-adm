@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointForward
@@ -14,6 +15,7 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import com.tecfit.gym_android_adm.R
 import com.tecfit.gym_android_adm.activities.utilities.ForFragments
 import com.tecfit.gym_android_adm.databinding.FragmentActivateMembershipBinding
+import com.tecfit.gym_android_adm.databinding.FragmentDetailsUserBinding
 import com.tecfit.gym_android_adm.models.Membership
 import com.tecfit.gym_android_adm.models.User
 import com.tecfit.gym_android_adm.models.custom.MembershipCustom
@@ -39,6 +41,8 @@ class ActivateMembershipFragment :Fragment(){
     private lateinit var expiry_date: String
     private var payment by Delegates.notNull<Double>()
 
+    lateinit var bindinDetail: FragmentDetailsUserBinding
+
     val listUserFragment = ListUserFragment()
 
 
@@ -52,11 +56,12 @@ class ActivateMembershipFragment :Fragment(){
         savedInstanceState: Bundle?
     ): View? {
         binding=FragmentActivateMembershipBinding.inflate(layoutInflater)
+        bindinDetail=FragmentDetailsUserBinding.inflate(layoutInflater)
         val arrayOptions= arrayOf<TextView>(binding.textOnemes,binding.textTwomes,binding.textDatemes)
         start_date = LocalDate.now().toString()
         text_selected = binding.textOnemes
         setBackgroundSelected(arrayOptions, binding.textOnemes)
-
+        requireParentFragment().requireActivity().findViewById<TextView>(R.id.info_user_btn_option).isVisible=false
 
         binding.membershipStartDate.setOnClickListener{
             val constraintsBuilder =
@@ -107,6 +112,10 @@ class ActivateMembershipFragment :Fragment(){
                 binding.btnActivateMembership.isEnabled = false
                 binding.btnActivateMembershipCancel.isEnabled = false
             }
+        }
+        binding.btnActivateMembershipCancel.setOnClickListener {
+            ForFragments.replaceFragment(parentFragmentManager,R.id.frame_details_user, InfoUserFragment())
+           requireParentFragment().requireActivity().findViewById<TextView>(R.id.info_user_btn_option).isVisible=true
         }
 
         return binding.root

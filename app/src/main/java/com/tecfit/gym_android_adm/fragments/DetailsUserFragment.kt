@@ -1,13 +1,17 @@
 package com.tecfit.gym_android_adm.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.tecfit.gym_android_adm.R
 import com.tecfit.gym_android_adm.activities.utilities.ForFragments
+import com.tecfit.gym_android_adm.activities.utilities.ForFragments.Companion.replaceInFragment
 import com.tecfit.gym_android_adm.databinding.FragmentDetailsUserBinding
 import com.tecfit.gym_android_adm.models.User
 import com.tecfit.gym_android_adm.models.custom.SelectedClass
@@ -19,7 +23,6 @@ class DetailsUserFragment : Fragment() {
     private val activateMembershipFragment = ActivateMembershipFragment()
 
     private lateinit var user: User
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,9 +38,11 @@ class DetailsUserFragment : Fragment() {
         ForFragments.replaceFragment(childFragmentManager, binding.frameDetailsUser.id, infoUserFragment )
        detailUser()
 
-        binding.infoUserBtnOption.setOnClickListener{
-            ForFragments.replaceFragment(childFragmentManager, binding.frameDetailsUser.id, activateMembershipFragment   )
+        val listUserFragment=ListUserFragment()
+        binding.detailReturnListUser.setOnClickListener {
+            ForFragments.replaceInFragment(listUserFragment,fragmentManager)
         }
+
         return binding.root
 
     }
@@ -52,7 +57,21 @@ class DetailsUserFragment : Fragment() {
         }
         binding.detailUserName.text= user.name+" "+user.lastname
         binding.detailActivoMembership.isVisible= user!!.membership
+        typeMembership()
     }
 
+    private fun typeMembership(){
+        if(user.membership!= true){
+            binding.infoUserBtnOption.setText("ACTIVAR MEMBRESIA")
+            binding.infoUserBtnOption.setOnClickListener{
+                ForFragments.replaceFragment(childFragmentManager, binding.frameDetailsUser.id, activateMembershipFragment   )
 
+            }
+        }else{
+            binding.infoUserBtnOption.setText("EXTENDER MEMBRESIA")
+            binding.infoUserBtnOption.setOnClickListener{
+                println("No me caes Oscar")
+            }
+        }
+    }
 }

@@ -14,21 +14,36 @@
         android:paddingHorizontal="30dp"
         android:orientation="vertical"
         android:layout_margin="2dp">
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            app:cardCornerRadius="1000dp"
-            app:cardElevation="5dp"
-            android:layout_gravity="center"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             >
-            <ImageView
-                android:id="@+id/photo_profile"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/profile_user_image_default"
-                android:scaleType="centerCrop"/>
-        </com.google.android.material.card.MaterialCardView>
+        <ImageView
+            android:id="@+id/detail_return_list_user"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/ic_baseline_arrow_back_ios_24"
+            android:visibility="invisible"/>
+            <LinearLayout
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                app:cardCornerRadius="1000dp"
+                app:cardElevation="5dp"
+                android:layout_gravity="center"
+                >
+                <ImageView
+                    android:id="@+id/photo_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/profile_user_image_default"
+                    android:scaleType="centerCrop"/>
+            </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+        </LinearLayout>
         <TextView
             android:id="@+id/detail_user_name"
             android:layout_width="match_parent"
@@ -84,11 +99,12 @@
         </LinearLayout>
         <TextView
             android:id="@+id/info_user_btn_option"
-            android:layout_width="wrap_content"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:text="ACTIVAR MEMBRESIA"
+            android:text="ESPERANDO"
             android:layout_marginTop="10dp"
             android:padding="10dp"
+            android:visibility="invisible"
             android:textColor="@color/white"
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"

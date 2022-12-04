@@ -4,9 +4,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isVisible
 import com.tecfit.gym_android_adm.R
+import com.tecfit.gym_android_adm.databinding.FragmentDetailsUserBinding
 import com.tecfit.gym_android_adm.databinding.FragmentInfoUserBinding
 import com.tecfit.gym_android_adm.models.User
 import com.tecfit.gym_android_adm.models.UserInAppCustom.Companion.user
@@ -26,7 +28,7 @@ class   InfoUserFragment : Fragment() {
 
     lateinit var binding: FragmentInfoUserBinding
     val activateMembershipFragment = ActivateMembershipFragment()
-
+    lateinit var bindinDetail: FragmentDetailsUserBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +39,7 @@ class   InfoUserFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentInfoUserBinding.inflate(layoutInflater)
+        bindinDetail= FragmentDetailsUserBinding.inflate(layoutInflater)
         infoUser()
 
         return binding.root
@@ -68,6 +71,8 @@ class   InfoUserFragment : Fragment() {
                     UserInAppCustom.membership = Membership(0, Date(), Date(), 0.0)
                 }
                 typeMembership()
+                requireParentFragment().requireActivity().findViewById<TextView>(R.id.info_user_btn_option).isVisible=true
+                requireParentFragment().requireActivity().findViewById<ImageView>(R.id.detail_return_list_user).isVisible=true
             }
 
             override fun onFailure(call: Call<Membership>, t: Throwable) {

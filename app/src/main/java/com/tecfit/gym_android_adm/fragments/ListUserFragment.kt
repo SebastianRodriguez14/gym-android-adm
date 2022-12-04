@@ -44,6 +44,21 @@ import java.time.LocalDate
 import java.util.*
 import kotlin.properties.Delegates
 
+class FilterUsers{
+    companion object{
+        var nameUser:String=""
+        var availableUser:Boolean=false
+        fun applyFilters(users:List<User>):List<User>{
+            val filteredUsers= users.filter { user ->
+                val checkNameUser = if(nameUser == "") true else user.name.lowercase().startsWith(
+                    nameUser.lowercase())
+                val checkAvailable= if(availableUser) user.membership else true
+                checkNameUser && checkAvailable
+            }
+            return filteredUsers
+        }
+    }
+}
 
 class ListUserFragment : Fragment() {
 
@@ -112,7 +127,7 @@ class ListUserFragment : Fragment() {
         listUsersLinearLayout= root.findViewById(R.id.users_list_linear)
         listUsersVoidLinearLayout=root.findViewById(R.id.users_list_void_linear)
 
-        if(ArraysForClass.arrayUsers.isEmpty()) {
+        if(ArraysForClass.arrayUsers == null) {
             apiGetUsers()
         }else{
             setArrayForRecycler()
@@ -125,6 +140,19 @@ class ListUserFragment : Fragment() {
                 setArrayForRecycler(true)
             }
         }
+
+        inputNameUser=root.findViewById(R.id.user_input_name)
+        inputNameUser.addTextChangedListener(object :TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                if (ArraysForClass.arrayUsers!= null){
+                    FilterUsers.nameUser=s.toString()
+                    setArrayForRecycler(true)
+                }
+            }
+        })
 
         addButton.setOnClickListener{
             val bottomSheetDialog = BottomSheetDialog(
@@ -218,38 +246,12 @@ class ListUserFragment : Fragment() {
             }
             bottomSheetDialog.setContentView(bottomSheetView)
             bottomSheetDialog.show()
-            inputNameUser=root.findViewById(R.id.user_input_name)
-            inputNameUser.addTextChangedListener(object :TextWatcher{
-                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
 
-                override fun afterTextChanged(s: Editable?) {
-                    if (ArraysForClass.arrayUsers!= null){
-                        FilterUsers.nameUser=s.toString()
-                        setArrayForRecycler(true)
-                    }
-                }
-            })
 
         }
         // Aquï acaba la llamada al modal
         auth = FirebaseAuth.getInstance()
         return root
-    }
-
-    class FilterUsers{
-        companion object{
-            var nameUser:String=""
-            var availableUser:Boolean=false
-            fun applyFilters(users:List<User>):List<User>{
-                val filteredUsers= users.filter { user ->
-                    val checkName=if(nameUser=="")true else user.name.lowercase().startsWith(nameUser.lowercase())
-                    val checkAvailable= if(availableUser) user.membership else true
-                    checkName && checkAvailable
-                }
-                return filteredUsers
-            }
-        }
     }
     private fun createDetailsDialog() {
         bottomSheetDialogDetails = BottomSheetDialog(requireActivity(), R.style.BottonSheetDialog)
@@ -261,8 +263,8 @@ class ListUserFragment : Fragment() {
     }
 
     private fun setArrayForRecycler(filter:Boolean = false) {
-        var users = if (!filter) ArraysForClass.arrayUsers else FilterUsers.applyFilters(
-            ArraysForClass.arrayUsers
+        var users = if (!filter) ArraysForClass.arrayUsers!! else FilterUsers.applyFilters(
+            ArraysForClass.arrayUsers!!
         )
         recyclerView.adapter=UserAdapter(users, fragmentManager )
 
@@ -291,13 +293,14 @@ class ListUserFragment : Fragment() {
                 if(listUsers!=null){
                     //usersList=listUsers.filter { u -> u.email != "gimnasiotecfit2022@gmail.com" }
                    //initRecyclerView(R.id.recyclerview_users)
-                    ArraysForClass.arrayUsers= listUsers as MutableList<User>
+                    ArraysForClass.arrayUsers= listUsers
                     setArrayForRecycler()
                 }
             }
 
             override fun onFailure(call: Call<List<User>>, t: Throwable) {
                 println("Error:getUsers() failure")
+                apiGetUsers()
                 println(t.message)
             }
         })

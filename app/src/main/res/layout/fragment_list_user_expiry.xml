@@ -14,7 +14,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <LinearLayout
-            android:id="@+id/title_users"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center">
@@ -30,6 +29,7 @@
                 android:textSize="20dp" />
         </LinearLayout>
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_users_expiry"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:listitem="@layout/item_users_expiry"

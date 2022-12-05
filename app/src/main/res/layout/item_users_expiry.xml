@@ -15,7 +15,7 @@
     android:layout_height="match_parent"
     android:orientation="horizontal">
     <LinearLayout
-        android:id="@+id/item_user"
+        android:id="@+id/item_user_expiry"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="5dp"
@@ -29,7 +29,7 @@
                 android:layout_gravity="center"
                 >
             <ImageView
-                android:id="@+id/item_user_image"
+                android:id="@+id/item_user_expiry_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/profile_user_image_default"
@@ -44,11 +44,13 @@
             android:gravity="center"
             >
             <TextView
+                android:id="@+id/item_user_expiry_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Anya Forger"
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/black"
+                android:maxLines="1"
                 android:textSize="16sp"
                 />
             <LinearLayout
@@ -69,6 +71,7 @@
 
                     />
                 <TextView
+                    android:id="@+id/item_user_expiry_time"
                     android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

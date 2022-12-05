@@ -94,7 +94,7 @@ class   InfoUserFragment : Fragment() {
 
             val time_elapsed:Long = UserInAppCustom.membership!!.expiration_date.time - currentDate.time
             val unit = TimeUnit.DAYS
-            val days = unit.convert(time_elapsed, TimeUnit.MILLISECONDS) //Días restantes
+            val days = unit.convert(time_elapsed, TimeUnit.MILLISECONDS) + 1 //Días restantes
 
             val remainingDays = formatRemainingDays(days)
 

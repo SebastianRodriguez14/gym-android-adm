@@ -3,7 +3,6 @@ package com.tecfit.gym_android_adm.activities.utilities
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
-import androidx.core.view.isVisible
 
 class ForValidations {
 

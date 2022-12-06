@@ -1,16 +1,13 @@
 package com.tecfit.gym_android_adm.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.tecfit.gym_android_adm.R
 import com.tecfit.gym_android_adm.databinding.FragmentListUserExpiryBinding
 import com.tecfit.gym_android_adm.fragments.adapter.UserExpiryAdapter
-import com.tecfit.gym_android_adm.models.User
-import com.tecfit.gym_android_adm.models.custom.ArraysForClass
 import com.tecfit.gym_android_adm.models.custom.UserToFinish
 import com.tecfit.gym_android_adm.retrofit.ApiService
 import com.tecfit.gym_android_adm.retrofit.RetrofitAdmin

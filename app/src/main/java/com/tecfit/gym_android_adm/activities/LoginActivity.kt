@@ -1,12 +1,9 @@
 package com.tecfit.gym_android_adm.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
-import com.tecfit.gym_android_adm.R
+import androidx.appcompat.app.AppCompatActivity
 import com.tecfit.gym_android_adm.databinding.ActivityLoginBinding
 import com.tecfit.gym_android_adm.models.User
 import com.tecfit.gym_android_adm.models.UserInAppCustom

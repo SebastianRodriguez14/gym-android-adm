@@ -27,8 +27,6 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.time.LocalDate
-import java.time.LocalDate.now
-import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.properties.Delegates
 

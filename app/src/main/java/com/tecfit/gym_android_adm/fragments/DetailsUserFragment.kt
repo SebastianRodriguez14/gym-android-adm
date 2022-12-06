@@ -1,17 +1,13 @@
 package com.tecfit.gym_android_adm.fragments
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
-import com.tecfit.gym_android_adm.R
 import com.tecfit.gym_android_adm.activities.utilities.ForFragments
-import com.tecfit.gym_android_adm.activities.utilities.ForFragments.Companion.replaceInFragment
 import com.tecfit.gym_android_adm.databinding.FragmentDetailsUserBinding
 import com.tecfit.gym_android_adm.models.User
 import com.tecfit.gym_android_adm.models.custom.SelectedClass
@@ -21,6 +17,7 @@ class DetailsUserFragment : Fragment() {
     lateinit var binding: FragmentDetailsUserBinding
     private val infoUserFragment = InfoUserFragment()
     private val activateMembershipFragment = ActivateMembershipFragment()
+    private val extendMembershipFragment = ExtendMembershipFragment()
 
     private lateinit var user: User
 
@@ -70,6 +67,7 @@ class DetailsUserFragment : Fragment() {
         }else{
             binding.infoUserBtnOption.setText("EXTENDER MEMBRESIA")
             binding.infoUserBtnOption.setOnClickListener{
+                ForFragments.replaceFragment(childFragmentManager,binding.frameDetailsUser.id,extendMembershipFragment)
                 println("No me caes Oscar")
             }
         }

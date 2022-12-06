@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.tecfit.gym_android_adm.R
-import com.tecfit.gym_android_adm.fragments.ListTrainersFragment
 import com.tecfit.gym_android_adm.models.Trainer
 
 class TrainerAdapter(private val trainerList:List<Trainer>, val bottomSheetDialoUpdate: BottomSheetDialog, val bottomSheetDialogDelete: BottomSheetDialog) : RecyclerView.Adapter<TrainerViewHolder>(){

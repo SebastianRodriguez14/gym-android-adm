@@ -1,8 +1,6 @@
 package com.tecfit.gym_android_adm.activities.utilities
 
-import android.content.Context
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import www.sanju.motiontoast.MotionToast
 import www.sanju.motiontoast.MotionToastStyle
 

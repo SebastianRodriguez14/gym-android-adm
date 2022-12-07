@@ -14,6 +14,7 @@ import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.tecfit.gym_android_adm.R
 import com.tecfit.gym_android_adm.activities.utilities.ForFragments
+import com.tecfit.gym_android_adm.activities.utilities.ForValidations
 import com.tecfit.gym_android_adm.databinding.FragmentDetailsUserBinding
 import com.tecfit.gym_android_adm.databinding.FragmentExtendMembershipBinding
 import java.text.SimpleDateFormat
@@ -28,7 +29,6 @@ class ExtendMembershipFragment: Fragment() {
     private lateinit var start_date: String
     private lateinit var expiry_date: String
     private var payment by Delegates.notNull<Double>()
-    lateinit var bindingDetail: FragmentDetailsUserBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +40,6 @@ class ExtendMembershipFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding=FragmentExtendMembershipBinding.inflate(layoutInflater)
-        bindingDetail=FragmentDetailsUserBinding.inflate(layoutInflater)
         val arrayOptions= arrayOf<TextView>(binding.extendTextOnemes,binding.extendTextTwomes,binding.extendTextDatemes)
         start_date = LocalDate.now().toString()
         text_selected = binding.extendTextOnemes
@@ -89,7 +88,7 @@ class ExtendMembershipFragment: Fragment() {
                         c.time = sdf.parse(start_date) as Date
                         c.add(Calendar.MONTH, 1)
                         expiry_date = sdf.format(c.time)
-                        println("expiry: $expiry_date")
+//                        println("expiry: $expiry_date")
                         binding.extendTextDatemes.text = "Fecha Personalizada"
                     }
                     binding.extendTextTwomes->{
@@ -103,7 +102,7 @@ class ExtendMembershipFragment: Fragment() {
                         c.time = sdf.parse(start_date) as Date
                         c.add(Calendar.MONTH, 3)
                         expiry_date = sdf.format(c.time)
-                        println("expiry: $expiry_date")
+//                        println("expiry: $expiry_date")
                         binding.extendTextDatemes.text = "Fecha Personalizada"
                     }
                     binding.extendTextDatemes-> {
@@ -131,7 +130,7 @@ class ExtendMembershipFragment: Fragment() {
                             c.add(Calendar.DATE, 1)
                             dft = sdf.format(c.time)
                             expiry_date = dft
-                            println("expiry: $expiry_date")
+//                            println("expiry: $expiry_date")
                             binding.extendTextDatemes.text = dft
                         }
                         binding.expiryDateLayout.visibility = View.VISIBLE
@@ -141,14 +140,15 @@ class ExtendMembershipFragment: Fragment() {
             else{
                 textview.setBackgroundResource(R.drawable.shape_info_page_option)
             }
-            println(textview.text.toString() + " - " + textview.id)
+//            println(textview.text.toString() + " - " + textview.id)
         }
+        println("${text_selected.text.toString()} - ${expiry_date}")
+
     }
 
     private fun validationDate():Boolean{
-        var isPass: Boolean
-            if(binding.extendTxtPayment.isEnabled && binding.extendTxtPayment.text.isEmpty()){
-                binding.paymentError.visibility = View.VISIBLE
+        val isPass: Boolean
+            if(binding.extendTxtPayment.isEnabled && ForValidations.valInput(binding.extendTxtPayment, binding.paymentError, ForValidations::valPrice)){
                 isPass = false
             } else {
                 binding.paymentError.visibility = View.INVISIBLE

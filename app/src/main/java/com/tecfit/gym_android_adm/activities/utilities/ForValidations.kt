@@ -43,6 +43,11 @@ class ForValidations {
             return regOnlyPassword.containsMatchIn(text)
         }
 
+        fun valPrice(text:String):Boolean{
+            val regOnlyDecimal:Regex = Regex("^[0-9]+(\\.[0-9]+|\\.)?\$")
+            customMessage = "Este campo solo acepta decimales"
+            return regOnlyDecimal.containsMatchIn(text)
+        }
 
         //Valida cualquier texto que no tenga saltos de línea.
         fun valAllTypeText(text:String):Boolean{

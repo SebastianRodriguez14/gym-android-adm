@@ -1,6 +1,7 @@
 package com.tecfit.gym_android_adm.retrofit
 
 import com.tecfit.gym_android_adm.models.*
+import com.tecfit.gym_android_adm.models.custom.ExpiryDate
 import com.tecfit.gym_android_adm.models.custom.MembershipCustom
 import com.tecfit.gym_android_adm.models.custom.MembershipRegister
 import com.tecfit.gym_android_adm.models.custom.UserToFinish
@@ -61,5 +62,8 @@ interface ApiService {
 
     @GET("membership/toFinish")
     fun getUsersToFinishMembership():Call<List<UserToFinish>>
+
+    @PUT("membership/update/{id_membership}")
+    fun putExtendMembership(@Body expiryDate: ExpiryDate, @Path("id_membership") id_membership:Int):Call<Void>
 
 }

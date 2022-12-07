@@ -1,5 +1,6 @@
 package com.tecfit.gym_android_adm.models.custom
 
+import com.tecfit.gym_android_adm.models.Membership
 import com.tecfit.gym_android_adm.models.Product
 import com.tecfit.gym_android_adm.models.Trainer
 import com.tecfit.gym_android_adm.models.User

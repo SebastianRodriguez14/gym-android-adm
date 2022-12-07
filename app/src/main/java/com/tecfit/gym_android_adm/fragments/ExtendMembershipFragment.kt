@@ -17,6 +17,16 @@ import com.tecfit.gym_android_adm.activities.utilities.ForFragments
 import com.tecfit.gym_android_adm.activities.utilities.ForValidations
 import com.tecfit.gym_android_adm.databinding.FragmentDetailsUserBinding
 import com.tecfit.gym_android_adm.databinding.FragmentExtendMembershipBinding
+import com.tecfit.gym_android_adm.models.Membership
+import com.tecfit.gym_android_adm.models.UserInAppCustom
+import com.tecfit.gym_android_adm.models.custom.ExpiryDate
+import com.tecfit.gym_android_adm.models.custom.MembershipCustom
+import com.tecfit.gym_android_adm.models.custom.SelectedClass
+import com.tecfit.gym_android_adm.retrofit.ApiService
+import com.tecfit.gym_android_adm.retrofit.RetrofitAdmin
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.util.*
@@ -26,7 +36,7 @@ class ExtendMembershipFragment: Fragment() {
 
     lateinit var binding: FragmentExtendMembershipBinding
     private lateinit var text_selected: TextView
-    private lateinit var start_date: String
+    private lateinit var start_date: Date
     private lateinit var expiry_date: String
     private var payment by Delegates.notNull<Double>()
 
@@ -41,10 +51,13 @@ class ExtendMembershipFragment: Fragment() {
     ): View? {
         binding=FragmentExtendMembershipBinding.inflate(layoutInflater)
         val arrayOptions= arrayOf<TextView>(binding.extendTextOnemes,binding.extendTextTwomes,binding.extendTextDatemes)
-        start_date = LocalDate.now().toString()
+        start_date = UserInAppCustom.membership!!.expiration_date
+        println("Expiración de membresía: ")
         text_selected = binding.extendTextOnemes
         setBackgroundSelected(arrayOptions, binding.extendTextOnemes)
         requireParentFragment().requireActivity().findViewById<TextView>(R.id.info_user_btn_option).isVisible=false
+
+        println("Membresía del usuario -> ${UserInAppCustom.membership}")
 
         binding.extendTextOnemes.setOnClickListener{ setBackgroundSelected(arrayOptions, binding.extendTextOnemes)
         }
@@ -55,7 +68,7 @@ class ExtendMembershipFragment: Fragment() {
 
         binding.btnExtendMembership.setOnClickListener {
             if(validationDate()){
-                ForFragments.replaceFragment(parentFragmentManager,R.id.frame_details_user, InfoUserFragment())
+                apiPutExtendMembership()
                 binding.btnExtendMembership.background.alpha = 60
                 binding.btnExtendMembership.isEnabled = false
                 binding.btnExtendMembershipCancel.isEnabled = false
@@ -85,7 +98,7 @@ class ExtendMembershipFragment: Fragment() {
 
                         val c = Calendar.getInstance()
                         val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-                        c.time = sdf.parse(start_date) as Date
+                        c.time = start_date
                         c.add(Calendar.MONTH, 1)
                         expiry_date = sdf.format(c.time)
 //                        println("expiry: $expiry_date")
@@ -99,7 +112,7 @@ class ExtendMembershipFragment: Fragment() {
 
                         val c = Calendar.getInstance()
                         val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-                        c.time = sdf.parse(start_date) as Date
+                        c.time = start_date
                         c.add(Calendar.MONTH, 3)
                         expiry_date = sdf.format(c.time)
 //                        println("expiry: $expiry_date")
@@ -154,9 +167,32 @@ class ExtendMembershipFragment: Fragment() {
                 binding.paymentError.visibility = View.INVISIBLE
                 isPass = true
             }
-
         return isPass
     }
+
+    private fun apiPutExtendMembership(){
+
+        if(binding.extendTxtPayment.isEnabled){
+            payment = binding.extendTxtPayment.text.toString().toDouble()
+        }
+
+        val expiryDate = ExpiryDate( expiry_date, payment)
+        val apiService: ApiService = RetrofitAdmin.getRetrofit().create(ApiService::class.java)
+        apiService.putExtendMembership(expiryDate, UserInAppCustom.membership!!.id_membership).enqueue(
+            object : Callback<Void> {
+                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                    println("Datos actualizados 🤙")
+                    ForFragments.replaceFragment(parentFragmentManager,R.id.frame_details_user, InfoUserFragment())
+                }
+
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                    println("Error: putExtendMembership() failure")
+                }
+            }
+        )
+    }
+
+
 
 
 

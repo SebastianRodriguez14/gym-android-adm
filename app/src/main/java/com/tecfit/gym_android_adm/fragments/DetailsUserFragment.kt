@@ -62,13 +62,11 @@ class DetailsUserFragment : Fragment() {
             binding.infoUserBtnOption.setText("ACTIVAR MEMBRESIA")
             binding.infoUserBtnOption.setOnClickListener{
                 ForFragments.replaceFragment(childFragmentManager, binding.frameDetailsUser.id, activateMembershipFragment   )
-
             }
         }else{
             binding.infoUserBtnOption.setText("EXTENDER MEMBRESIA")
             binding.infoUserBtnOption.setOnClickListener{
                 ForFragments.replaceFragment(childFragmentManager,binding.frameDetailsUser.id,extendMembershipFragment)
-                println("No me caes Oscar")
             }
         }
     }

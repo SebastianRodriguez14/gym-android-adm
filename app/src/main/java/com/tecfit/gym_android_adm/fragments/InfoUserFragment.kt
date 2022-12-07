@@ -65,8 +65,6 @@ class   InfoUserFragment : Fragment() {
                 if (UserInAppCustom.membership != null) {
                     UserInAppCustom.membership!!.start_date = Date(UserInAppCustom.membership!!.start_date.time + (1000 * 60 * 60 * 24))
                     UserInAppCustom.membership!!.expiration_date = Date(UserInAppCustom.membership!!.expiration_date.time + (1000 * 60 * 60 * 24))
-
-
                 } else {
                     UserInAppCustom.membership = Membership(0, Date(), Date(), 0.0)
                 }
